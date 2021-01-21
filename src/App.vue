@@ -1,15 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <full-page-scroller>
+    <full-page page-id="test1">test1</full-page>
+    <full-page page-id="test2">test2</full-page>
+    <full-page page-id="test3">test3</full-page>
+  </full-page-scroller>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import FullPage from "@/fullpageScroll/fullPage";
+import FullPageScroller from "@/fullpageScroll/fullPageScroller";
 export default {
   name: "App",
   components: {
-    HelloWorld
+    FullPageScroller,
+    FullPage
   }
 };
 </script>
