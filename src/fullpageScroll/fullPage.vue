@@ -10,14 +10,13 @@ import { registerPage } from "@/fullpageScroll/fullPageState";
 import { ref } from "vue";
 export default {
   name: "full-page",
+  emits: ["enter"],
   props: {
     pageId: {
-      type: String,
-      required: true
+      type: String
     }
   },
-  setup(props) {
-    console.log(props.pageId);
+  setup() {
     registerPage();
     const container = ref(null);
     return {
