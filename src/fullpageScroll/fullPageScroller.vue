@@ -7,18 +7,15 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+// import { onMounted } from "vue";
+// import { pages } from "@/fullpageScroll/fullPageState";
+
+import { init } from "@/fullpageScroll/fullPageState";
 
 export default {
   name: "fullPageScroller",
   setup() {
-    const dummy = document.createElement("div");
-    // style = 'visibility: hidden'
-    dummy.innerHTML = "<div>Invisible</div>";
-    document.body.appendChild(dummy);
-    onMounted(() => {
-      console.log("scroller mounted");
-    });
+    init();
   }
 };
 </script>

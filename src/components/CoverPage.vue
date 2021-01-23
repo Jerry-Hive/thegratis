@@ -6,12 +6,12 @@
 
 <script>
 import FullPage from "@/fullpageScroll/fullPage";
-import { onFullPageEnter } from "@/fullpageScroll/fullPageState";
+// import { onFullPageEnter } from "@/fullpageScroll/fullPageState";
 export default {
   name: "CoverPage",
   components: { FullPage },
   setup() {
-    onFullPageEnter(() => {});
+    // onFullPageEnter(() => {});
     function onEnter() {
       console.log("enter");
     }
