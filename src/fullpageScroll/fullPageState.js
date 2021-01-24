@@ -27,7 +27,8 @@ export function init() {
     setStyle(dummy, {
       height: pages.length * 100 + "vh",
       top: "0",
-      position: "absolute"
+      position: "absolute",
+      "z-index": -1
     });
     const firstPage = pageMap[pages[0]].container;
     setStyle(firstPage, { display: "block" });
@@ -55,6 +56,14 @@ export function init() {
     window.addEventListener("resize", () => {
       adjustDummy();
     });
+    // document.addEventListener("swiped-up", () => {
+    //   console.log("swiped up");
+    //   sleepLonger = true;
+    // });
+    // document.addEventListener("swiped-down", () => {
+    //   console.log("swiped down");
+    //   sleepLonger = true;
+    // });
   });
 }
 function move(step) {
@@ -69,6 +78,16 @@ function move(step) {
   const toContainer = pageMap[toId].container;
   const fromTop = step > 0 ? "-100vh" : "100vh";
   const toTop = step > 0 ? "100vh" : "-100vh";
+
+  setTimeout(() => {
+    if (step < 0) {
+      setStyle(dummy, { height: "110vh" });
+    } else {
+      console.log(to * 100 + 10 + "vh");
+      setStyle(dummy, { height: to * 100 + 20 + "vh" });
+    }
+  }, 100);
+
   gsap.set(toContainer, {
     top: toTop,
     display: "block"
@@ -86,10 +105,12 @@ function move(step) {
 }
 function adjustDummy() {
   scrolling = true;
+  // Hivue.log("to " + to);
+  setStyle(dummy, { display: "block", height: pages.length * 100 + "vh" });
   const vh = window.innerHeight;
   const to = state.currentPage * vh;
-  // Hivue.log("to " + to);
   window.scrollTo(0, to);
+
   scrollY = to;
   setTimeout(() => {
     scrolling = false;
