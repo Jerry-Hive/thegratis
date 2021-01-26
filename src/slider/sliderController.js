@@ -72,6 +72,13 @@ export function useSliderController(slides = [], options = {}) {
     }
     goto(0);
     if (autoPlay) play();
+    container.addEventListener("swiped-left", () => {
+      console.log("left");
+    });
+    container.addEventListener("click", () => {
+      console.log("click");
+    });
+    console.log(container);
   }
   const { currentSlide } = toRefs(state);
   return {
