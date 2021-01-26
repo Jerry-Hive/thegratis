@@ -42,6 +42,15 @@ $warm-white: #f9f8f4;
   position: absolute;
 }
 
+.origin{
+  left: 0;
+  top:0;
+}
+
+.relative{
+  position:relative;
+}
+
 .flex-center {
   -js-display: flex;
   display: flex;
@@ -129,4 +138,8 @@ $warm-white: #f9f8f4;
 .label {
   white-space: nowrap;
   user-select: none;
+}
+/*** --------------- */
+.overflow-hidden{
+  overflow: hidden;
 }

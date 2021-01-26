@@ -121,6 +121,7 @@ function move(step) {
     onComplete() {
       fromInstance.emit("left");
       toInstance.emit("entered");
+      console.log("entered", toInstance);
       playTimelines(toInstance);
       adjustDummy();
     },
@@ -159,7 +160,7 @@ export function registerPage() {
 const timelines = {};
 export function registerTimeline(timeline, reset = true) {
   const instance = getCurrentInstance();
-  console.log(instance.parent.type);
+  // console.log(instance.parent.type);
   const uid = instance.uid;
   if (!timelines[uid]) timelines[uid] = [];
   timelines[uid].push({ timeline, reset });
@@ -168,7 +169,7 @@ function playTimelines(instance) {
   const uid = instance.uid;
   console.log("play", uid);
   const tls = timelines[uid];
-  console.log(timelines);
+  // console.log(timelines);
   if (tls && tls.length) {
     for (let i = 0; i < tls.length; i++) {
       const { timeline } = tls[i];

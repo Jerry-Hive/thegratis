@@ -1,0 +1,54 @@
+{
+	"imageRoot": "/images/renders/",
+	"slides": [
+		{
+			"img": "entry",
+			"title": "The Grand Entrance",
+			"who": "ns"
+		},
+		{
+			"img": "kitchen-ns",
+			"title": "Kitchen (Signature Range) - by Embrace Architects",
+			"who": "ns"
+		},
+		{
+			"img": "kitchen-ab",
+			"title": "Kitchen (Prestige Range) - by Adele Bates",
+			"who": "ab"
+		},
+		{
+			"img": "fireplace-ph",
+			"title": "Living",
+			"who": "ab"
+		},
+		{
+			"img": "bedroom",
+			"title": "Master Bedroom",
+			"who": "ab"
+		},
+		{
+			"img": "dining",
+			"title": "Dining",
+			"who": "jm"
+		},
+		{
+			"img": "backyard2",
+			"title": "Ground Floor Terrace",
+			"who": "jm"
+		}
+	],
+	"people": {
+		"ns": {
+			"name": "Nicholas Sun",
+			"quote": "We believe that Architecture is the celebration of life. The qualities of space, light and materials should enhance the daily lifestyle of its occupiers. "
+		},
+		"ab": {
+			"name": "Adele Bates",
+			"quote": "There’s a beautiful flow and fluidity from room to room and space to space, it really does come together as one united interior."
+		},
+		"jm": {
+			"name": "Jack Merlo",
+			"quote": "You’ll certainly have the added benefit of apartment living and the lower maintenance aspect of that, but you won’t need to lose the nice leafy aspect that perhaps you have been used to."
+		}
+	}
+}

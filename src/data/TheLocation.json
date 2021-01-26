@@ -1,0 +1,75 @@
+{
+	"imageRoot": "/images/lifestyle/",
+	"slides": [
+		{
+			"img": "sacville",
+			"title": "Sackville Street",
+			"loc": "green"
+		},
+		{
+			"img": "trail2",
+			"title": "The Anniversary Trail",
+			"loc": "green"
+		},
+		{
+			"img": "park-elax2",
+			"title": "Central Gardens",
+			"loc": "green"
+		},
+		{
+			"img": "shop3",
+			"title": "Town & Country",
+			"loc": "dine"
+		},
+		{
+			"img": "wine2",
+			"title": "Meat & Wine",
+			"loc": "dine"
+		},
+		{
+			"img": "dine1",
+			"title": "Centonove",
+			"loc": "dine"
+		},
+		{
+			"img": "school3",
+			"title": "The best schools in Melbourne",
+			"loc": "school"
+		},
+		{
+			"img": "school2",
+			"title": "Just moments from your door",
+			"loc": "school"
+		},
+		{
+			"img": "market",
+			"title": "Camberwell Fresh Food Market",
+			"loc": "shopping"
+		},
+		{
+			"img": "shop4",
+			"title": "Camberwell Place Shopping Centre",
+			"loc": "shopping"
+		},
+		{
+			"img": "golf",
+			"title": "Kew Golf Club",
+			"loc": "recreation"
+		},
+		{
+			"img": "cinema",
+			"title": "Balwyn Palace",
+			"loc": "recreation"
+		}
+	],
+	"locations": {
+		"green": "Green spaces are abound in this picturesque Deepdene location, which offers recreational playing fields, scenic cycle paths, and lively playgrounds.",
+		"cafe": "Something about local cafes.",
+		"dine": "You’re an easy trip to a variety of fantastic eateries.",
+		"school": "Some of Melbourne’s most sought-after public and private schools are just moments from your door.",
+		"recreation": "Deepdene and the surrounding areas also deliver a number of wonderful leisure and recreation attractions.",
+		"shopping": "Your weekly shopping routine is made easy with The Gratis being in close proximity to both Camberwell Junction and Kew Junction shopping areas.",
+		"junction": "Something about Camberwell Junction",
+		"transport": "Something about train, tram & close by freeway."
+	}
+}

@@ -1,0 +1,98 @@
+{
+	"styles": {
+		"poiHeight": 100,
+		"poiStyle": "",
+		"color": "",
+		"labelStyle": "",
+		"lineThickness": "1px",
+		"dotSize": "5px",
+		"heroDotSize": "10px"
+	},
+	"gratis": {
+		"x": 1160,
+		"y": 1348,
+		"labelUrl": "/images/logo-white.png"
+	},
+	"cbd": {
+		"x": 1035,
+		"y": 985,
+		"labelText": "Melbourne<br/>CBD (8km)"
+	},
+	"pins": [
+		{
+			"x": 928,
+			"y": 1357,
+			"label": "Camberwell<br/>Girls Grammar"
+		},
+		{
+			"x": 165,
+			"y": 1218,
+			"label": "Camerwell Junction<br/>Shopping Precinct"
+		},
+		{
+			"x": 208,
+			"y": 1188,
+			"label": "Village Cinemas<br/>Rivoli"
+		},
+		{
+			"x": 250,
+			"y": 1234,
+			"label": "Camberwell<br/>Train Station"
+		},
+		{
+			"x": 1340,
+			"y": 1038,
+			"label": "St Vincent's<br/>Hospital"
+		},
+		{
+			"x": 1380,
+			"y": 1066,
+			"label": "Kew Junction<br/>Shopping Precinct"
+		},
+		{
+			"x": 1465,
+			"y": 1205,
+			"label": "St George's<br/> Hospital"
+		},
+		{
+			"x": 1900,
+			"y": 1060,
+			"label": "Kew<br/>Golf Club"
+		},
+		{
+			"x": 1388,
+			"y": 1281,
+			"label": "Reservoir<br/>Reserve"
+		},
+		{
+			"x": 1475,
+			"y": 1565,
+			"label": "Anniversary Trail"
+		},
+		{
+			"x": 1533,
+			"y": 1250,
+			"label": "Genazzano FCJ<br/>College"
+		},
+		{
+			"x": 1630,
+			"y": 1505,
+			"label": "Our Lady of Good Counsel<br/>Primary School"
+		},
+		{
+			"x": 880,
+			"y": 1100,
+			"label": "Central Gardens"
+		},
+		{
+			"x": 805,
+			"y": 1190,
+			"label": "Rathmines Road<br/>Reserve"
+		},
+		{
+			"x": 1830,
+			"y": 1400,
+			"label": "Deepdene<br/>Primary School"
+		}
+	]
+}

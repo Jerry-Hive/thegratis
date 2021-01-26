@@ -1,25 +1,27 @@
 import { reactive, toRefs } from "vue";
 import gsap from "gsap";
 
-export function useSliderController(
-  slides = [],
-  { autoPlay = true, speed = 1, delay = 3 }
-) {
+export function useSliderController(slides = [], options = {}) {
+  const { autoPlay = false, speed = 1, delay = 3 } = options;
   let intervalId;
   const state = reactive({
     currentSlide: 0
   });
+  let paused = true;
   function play() {
+    const timeout = paused ? delay : delay + speed;
     pause();
     intervalId = setInterval(() => {
       let to = state.currentSlide + 1;
-      if (to >= sliderContainers.length) {
+      if (to >= slides.length) {
         to = 0;
       }
       goto(to);
-    }, delay);
+    }, timeout * 1000);
+    paused = false;
   }
   function pause() {
+    paused = true;
     if (intervalId) clearInterval(intervalId);
   }
   function slideTo(index) {
@@ -40,12 +42,13 @@ export function useSliderController(
       opacity: 0,
       duration: speed
     });
-    gsap.to(inSlider, { opacity: 1 });
+    gsap.to(inSlider, { opacity: 1, duration: speed });
   }
   let currentSlideContainer = 0;
   const sliderContainers = [];
 
   function setImage(div, index) {
+    console.log("setImage", index, slides[index]);
     const style = div.style;
     style.backgroundImage = "url('" + slides[index] + "')";
   }
