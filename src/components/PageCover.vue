@@ -1,0 +1,122 @@
+<template>
+  <f-page @before-enter="onBeforeEnter">
+    <div class="full-page flex-center bg-warm-white">
+      <img
+        id="arc"
+        ref="arc"
+        src="@/assets/arc.png"
+        class="absolute"
+        style="height:45vh;top:-95vh;z-index:20; box-sizing: content-box;border:100vh solid #edd9d0"
+        @load="onload"
+      />
+
+      <img
+        id="hero"
+        class="absolute"
+        src="@/assets/i-hero.png"
+        style="height:45vh;top:5vh;z-index:10"
+      />
+      <img
+        src="@/assets/logo-dark.png"
+        id="cover-logo"
+        class="absolute z-top"
+        style="height:5.5vh;top:47vh;"
+      />
+
+      <img
+        src="@/assets/deepdene.png"
+        id="cover-deepdene"
+        class="absolute z-top"
+        style="height:1.6vh;top:54vh"
+      />
+      <scroll-down-ani
+        id="cover-scroll-down"
+        class="absolute z-top"
+        style="top:70.5vh"
+      />
+    </div>
+  </f-page>
+</template>
+
+<script>
+import { onMounted } from "vue";
+import gsap from "gsap";
+import FPage from "@/fullpageScroll/FPage";
+import { useCurrentPage } from "@/fullpageScroll/fullPage";
+import ScrollDownAni from "@/components/ScrollDownAni";
+
+export default {
+  name: "CoverPage",
+  components: { ScrollDownAni, FPage },
+  setup() {
+    const timeline = gsap.timeline({ delay: 1 });
+    const currentPage = useCurrentPage();
+    function setMotionFadeState(what, and = {}) {
+      gsap.set(what, {
+        ...and,
+        opacity: 0,
+        translateY: "20%"
+      });
+    }
+    function toMotionFade(what, opacity = 1) {
+      timeline.to(what, {
+        translateY: 0,
+        opacity,
+        duration: 1
+      });
+    }
+
+    const refs = {
+      register: "#global-register"
+    };
+    const registerCenterState = {
+      top: "59vh",
+      opacity: 0.8
+    };
+    onMounted(() => {
+      gsap.set("#arc", {
+        opacity: 0,
+        scale: 10
+      });
+      gsap.set("#hero", {
+        opacity: 0
+      });
+      setMotionFadeState("#cover-logo");
+      setMotionFadeState("#cover-deepdene");
+      setMotionFadeState("#cover-scroll-down");
+
+      if (currentPage.value == 0) {
+        setMotionFadeState(refs.register, registerCenterState);
+      }
+      toMotionFade("#hero");
+
+      timeline.to("#arc", {
+        opacity: 1,
+        duration: 2,
+        scale: 1,
+        ease: "power3.out"
+      });
+      toMotionFade("#cover-logo", 0.9);
+      toMotionFade("#cover-deepdene", 0.8);
+      timeline.to("#global-register", {
+        ...registerCenterState,
+        translateY: 0
+      });
+      toMotionFade("#cover-scroll-down");
+    });
+    function onload() {
+      timeline.play();
+    }
+    function onBeforeEnter() {
+      gsap.to(refs.register, registerCenterState);
+    }
+    return { onload, onBeforeEnter };
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.z-top {
+  z-index: 30;
+}
+</style>

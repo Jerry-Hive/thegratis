@@ -10,10 +10,10 @@
 // import { onMounted } from "vue";
 // import { pages } from "@/fullpageScroll/fullPageState";
 
-import { init } from "@/fullpageScroll/fullPageState";
+import { init } from "@/fullpageScroll/fullPage";
 
 export default {
-  name: "fullPageScroller",
+  name: "f-page-viewport",
   setup() {
     init();
   }

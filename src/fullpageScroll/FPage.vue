@@ -1,16 +1,16 @@
 <template>
-  <div style="width:100%;height:100vh;border:1px solid red" ref="container">
+  <div style="width:100%;height:100vh;overflow: hidden" ref="container">
     <slot />
   </div>
 </template>
 
 <script>
 // import { onCreate } from "vue";
-import { registerPage } from "@/fullpageScroll/fullPageState";
+import { registerPage } from "@/fullpageScroll/fullPage";
 import { ref } from "vue";
 export default {
-  name: "full-page",
-  emits: ["enter"],
+  name: "f-page",
+  emits: ["before-enter", "entered", "before-leave", "left"],
   props: {
     pageId: {
       type: String

@@ -1,0 +1,132 @@
+$peach: #edd9d0;
+$navy: #29323c;
+$warm-white: #f9f8f4;
+.full-page {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.bg-warm-white {
+  background-color: $warm-white;
+}
+
+.bg-navy {
+  background-color: $navy;
+}
+
+.bg-peach {
+  background-color: $peach;
+}
+
+.bg-full-image {
+  background-size: cover;
+  background-position: center;
+}
+
+.full-page {
+  width: 100%;
+  height: 100vh;
+}
+
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.flex-center {
+  -js-display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.transparent {
+  opacity: 0;
+}
+
+.opacity-50 {
+  opacity: .5;
+}
+
+// -------------------- Text ---------------------
+.caslon {
+  font-family: big-caslon-fb, serif;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.h1 {
+  font-size: 2vh;
+  letter-spacing: 0.07em;
+}
+
+.h2 {
+  font-size: 1.5vh;
+  letter-spacing: 0.05em;
+}
+
+.h3 {
+  font-size: 1vh;
+}
+
+.b {
+  font-weight: bolder;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-navy {
+  color: $navy !important;
+}
+
+.text-peach {
+  color: #ddbcb0 !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.font-small {
+  font-size: .6em;
+}
+
+.comfort-letter-spacing {
+  letter-spacing: 0.1em;
+}
+.comfort-margin-bottom {
+  margin-bottom: 1em;
+}
+.margin-auto{
+  margin:auto;
+}
+.label {
+  white-space: nowrap;
+  user-select: none;
+}

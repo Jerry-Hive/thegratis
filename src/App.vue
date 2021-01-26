@@ -1,33 +1,31 @@
 <template>
-  <full-page-scroller>
-    <cover-page />
-    <full-page page-id="test1">test1</full-page>
-    <full-page page-id="test2">test2</full-page>
-    <full-page page-id="test3">test3</full-page>
-  </full-page-scroller>
+  <f-page-viewport>
+    <page-overlay />
+    <page-cover />
+    <page-preface />
+    <f-page>nima</f-page>
+    <f-page>niba</f-page>
+  </f-page-viewport>
 </template>
 
 <script>
-import FullPage from "@/fullpageScroll/fullPage";
-import FullPageScroller from "@/fullpageScroll/fullPageScroller";
-import CoverPage from "@/components/CoverPage";
+import PageCover from "@/components/PageCover";
+import FPageViewport from "@/fullpageScroll/FPageViewport";
+import FPage from "@/fullpageScroll/FPage";
+import PagePreface from "@/components/PagePreface";
+import PageOverlay from "@/components/PageOverlay";
 export default {
   name: "App",
   components: {
-    CoverPage,
-    FullPageScroller,
-    FullPage
+    PageOverlay,
+    PagePreface,
+    FPage,
+    FPageViewport,
+    PageCover
   }
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import "app";
 </style>
