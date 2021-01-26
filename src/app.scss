@@ -143,3 +143,9 @@ $warm-white: #f9f8f4;
 .overflow-hidden{
   overflow: hidden;
 }
+.hand{
+  cursor: pointer;
+}
+.receive-events{
+  pointer-events: all;
+}

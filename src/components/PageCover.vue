@@ -31,8 +31,9 @@
       />
       <scroll-down-ani
         id="cover-scroll-down"
-        class="absolute z-top"
+        class="absolute z-top hand"
         style="top:70.5vh"
+        @click="next"
       />
     </div>
   </f-page>
@@ -42,7 +43,7 @@
 import { onMounted } from "vue";
 import gsap from "gsap";
 import FPage from "@/fullpageScroll/FPage";
-import { useCurrentPage } from "@/fullpageScroll/fullPage";
+import { nextPage, useCurrentPage } from "@/fullpageScroll/fullPage";
 import ScrollDownAni from "@/components/ScrollDownAni";
 
 export default {
@@ -85,7 +86,7 @@ export default {
       setMotionFadeState("#cover-deepdene");
       setMotionFadeState("#cover-scroll-down");
 
-      if (currentPage.value == 0) {
+      if (currentPage.value === 0) {
         setMotionFadeState(refs.register, registerCenterState);
       }
       toMotionFade("#hero");
@@ -110,7 +111,10 @@ export default {
     function onBeforeEnter() {
       gsap.to(refs.register, registerCenterState);
     }
-    return { onload, onBeforeEnter };
+    function next() {
+      nextPage();
+    }
+    return { onload, onBeforeEnter, next };
   }
 };
 </script>

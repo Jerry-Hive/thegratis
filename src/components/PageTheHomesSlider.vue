@@ -1,7 +1,7 @@
 <template>
   <f-page @before-leave="beforeLeave" @entered="entered">
     <div class="full-size" style="display:flex;">
-      <div class="col">Left</div>
+      <div class="col" v-if="showLeft">Left</div>
       <div class="col flex-center">
         <arc-slider :controller="slideController" />
       </div>
@@ -14,6 +14,8 @@ import FPage from "@/fullpageScroll/FPage";
 import ArcSlider from "@/components/ArcSlider";
 import homesData from "@/data/TheHomes.json";
 import { useSliderController } from "@/slider/sliderController";
+import { useWindowSize } from "@vueuse/core";
+import { computed } from "vue";
 export default {
   name: "PageTheHomesSlider",
   components: { ArcSlider, FPage },
@@ -21,7 +23,7 @@ export default {
     const slides = [];
     homesData.slides.forEach(element => {
       // carouselTitles[data.length] = element.title;
-      slides.push("/images/render/" + element.img + ".jpg");
+      slides.push("/images/renders/" + element.img + ".jpg");
     });
     const slideController = useSliderController(slides);
     function beforeLeave() {
@@ -31,7 +33,14 @@ export default {
       console.log("the homes entered");
       slideController.play();
     }
-    return { slideController, beforeLeave, entered };
+    const { width: windowWidth, height: windowHeight } = useWindowSize();
+    const showLeft = computed(() => {
+      const width = windowWidth.value;
+      const height = windowHeight.value;
+      if (height > width) return false;
+      return true;
+    });
+    return { slideController, beforeLeave, entered, showLeft };
   }
 };
 </script>

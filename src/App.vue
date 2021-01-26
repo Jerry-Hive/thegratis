@@ -1,6 +1,6 @@
 <template>
   <f-page-viewport>
-    <!--    <page-overlay />-->
+    <page-overlay />
     <page-cover />
     <page-preface />
     <page-the-homes-slider />
@@ -14,13 +14,13 @@ import PageCover from "@/components/PageCover";
 import FPageViewport from "@/fullpageScroll/FPageViewport";
 import FPage from "@/fullpageScroll/FPage";
 import PagePreface from "@/components/PagePreface";
-// import PageOverlay from "@/components/PageOverlay";
+import PageOverlay from "@/components/PageOverlay";
 import PageTheHomesSlider from "@/components/PageTheHomesSlider";
 export default {
   name: "App",
   components: {
     PageTheHomesSlider,
-    // PageOverlay,
+    PageOverlay,
     PagePreface,
     FPage,
     FPageViewport,

@@ -2,7 +2,7 @@
   <f-page-overlay class="flex-center">
     <img
       src="@/assets/register.png"
-      class="absolute"
+      class="absolute hand receive-events"
       style="width:8vh;height:8vh"
       id="global-register"
     />

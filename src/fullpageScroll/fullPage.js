@@ -82,6 +82,15 @@ function handleScroll(e) {
   move(step);
   scrollY = y;
 }
+export function nextPage() {
+  move(1);
+}
+export function prevPage() {
+  move(-1);
+}
+export function firstPage() {
+  move(-state.currentPage);
+}
 function move(step) {
   const from = state.currentPage;
   state.currentPage += step;
@@ -197,17 +206,17 @@ function resetTimelines(instance) {
     if (parent.type.name !== "f-page-viewport") resetTimelines(parent);
   }
 }
-const overlayStates = {};
-const overlayHijacks = {};
-export function registerOverlayState(target, state) {
-  overlayStates[target] = state;
-}
-export function hijackOverlay(target) {
-  const instance = getCurrentInstance();
-  const uid = instance.uid;
-  if (!overlayHijacks[uid]) overlayHijacks[uid] = [];
-  overlayHijacks[uid].push(target);
-}
+// const overlayStates = {};
+// const overlayHijacks = {};
+// export function registerOverlayState(target, state) {
+//   overlayStates[target] = state;
+// }
+// export function hijackOverlay(target) {
+//   const instance = getCurrentInstance();
+//   const uid = instance.uid;
+//   if (!overlayHijacks[uid]) overlayHijacks[uid] = [];
+//   overlayHijacks[uid].push(target);
+// }
 // export function onFullPageEnter(fn) {
 //   const instance = getCurrentInstance();
 //   console.log("onFullPageEnter");
