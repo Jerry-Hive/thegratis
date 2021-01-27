@@ -8,7 +8,10 @@
         alt=""
       />
     </div>
-
+    <slider-bullets
+      style="width:42vh;margin-top:1.5vh;z-index:400"
+      :controller="controller"
+    />
     <!--    <hive-slider-bullets-->
     <!--      ref="bullets"-->
     <!--      :total="slides.length"-->
@@ -20,10 +23,11 @@
 
 <script>
 import { onMounted, ref } from "vue";
+import SliderBullets from "@/slider/SliderBullets";
 
 export default {
   name: "ArcSlider",
-  components: {},
+  components: { SliderBullets },
   props: {
     controller: Object
   },

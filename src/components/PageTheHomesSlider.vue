@@ -11,7 +11,7 @@
 
 <script>
 import FPage from "@/fullpageScroll/FPage";
-import ArcSlider from "@/components/ArcSlider";
+import ArcSlider from "@/slider/ArcSlider";
 import homesData from "@/data/TheHomes.json";
 import { useSliderController } from "@/slider/sliderController";
 import { useWindowSize } from "@vueuse/core";

@@ -95,6 +95,7 @@ export function useSliderController(slides = [], options = {}) {
     play,
     pause,
     currentSlide,
+    totalSlides: slides.length,
     next,
     prev
   };
