@@ -1,6 +1,11 @@
 $peach: #edd9d0;
 $navy: #29323c;
 $warm-white: #f9f8f4;
+
+img{
+  user-select: none;
+}
+
 .full-page {
   width: 100%;
   height: 100vh;
@@ -146,6 +151,12 @@ $warm-white: #f9f8f4;
 .hand{
   cursor: pointer;
 }
-.receive-events{
+.enable-events{
   pointer-events: all;
+}
+.disable-events{
+  pointer-events: none;
+}
+.disable-select{
+  user-select: none;
 }

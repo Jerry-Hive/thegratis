@@ -1,8 +1,12 @@
 <template>
-  <div class="container flex-center" @click="click" @swiped-left="swipedLeft">
+  <div class="container flex-center">
     <div class="slider-container relative">
       <div class="slider-container" ref="sliderContainer"></div>
-      <img src="@/assets/arc-tight.png" class="arc-cover" alt="" />
+      <img
+        src="@/assets/arc-tight.png"
+        class="arc-cover disable-events disable-select"
+        alt=""
+      />
     </div>
 
     <!--    <hive-slider-bullets-->
@@ -29,20 +33,9 @@ export default {
     const controller = props.controller;
     onMounted(() => {
       controller.install(sliderContainer.value);
-      sliderContainer.value.addEventListener("swiped-left", () => {
-        console.log("swiped left");
-      });
     });
-
-    function swipedLeft() {
-      console.log("left");
-    }
     return {
-      sliderContainer,
-      swipedLeft,
-      click() {
-        console.log("arc-click");
-      }
+      sliderContainer
     };
   }
 };

@@ -130,7 +130,7 @@ function move(step) {
     onComplete() {
       fromInstance.emit("left");
       toInstance.emit("entered");
-      console.log("entered", toInstance);
+      // console.log("entered", toInstance);
       playTimelines(toInstance);
       adjustDummy();
     },

@@ -12,11 +12,7 @@ export function useSliderController(slides = [], options = {}) {
     const timeout = paused ? delay : delay + speed;
     pause();
     intervalId = setInterval(() => {
-      let to = state.currentSlide + 1;
-      if (to >= slides.length) {
-        to = 0;
-      }
-      goto(to);
+      goto(state.currentSlide + 1);
     }, timeout * 1000);
     paused = false;
   }
@@ -28,12 +24,24 @@ export function useSliderController(slides = [], options = {}) {
     goto(index);
     play();
   }
+  function next() {
+    slideTo(state.currentSlide + 1);
+  }
+  function prev() {
+    slideTo(state.currentSlide - 1);
+  }
   function goto(index) {
+    let to = index;
+    if (to >= slides.length) {
+      to = 0;
+    } else if (to < 0) {
+      to = slides.length - 1;
+    }
     const outSlider = sliderContainers[currentSlideContainer];
     currentSlideContainer = 1 - currentSlideContainer;
     const inSlider = sliderContainers[currentSlideContainer];
-    state.currentSlide = index;
-    setImage(inSlider, index);
+    state.currentSlide = to;
+    setImage(inSlider, to);
     gsap.set(inSlider, {
       opacity: 0,
       duration: speed
@@ -66,19 +74,19 @@ export function useSliderController(slides = [], options = {}) {
         position: "absolute",
         left: 0,
         top: 0,
-        opacity: 0
+        opacity: 0,
+        "user-select": "none"
       });
       sliderContainers.push(slideDiv);
     }
     goto(0);
     if (autoPlay) play();
     container.addEventListener("swiped-left", () => {
-      console.log("left");
+      next();
     });
-    container.addEventListener("click", () => {
-      console.log("click");
+    container.addEventListener("swiped-right", () => {
+      prev();
     });
-    console.log(container);
   }
   const { currentSlide } = toRefs(state);
   return {
@@ -86,6 +94,8 @@ export function useSliderController(slides = [], options = {}) {
     slideTo,
     play,
     pause,
-    currentSlide
+    currentSlide,
+    next,
+    prev
   };
 }
