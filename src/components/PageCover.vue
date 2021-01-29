@@ -1,5 +1,5 @@
 <template>
-  <f-page @before-enter="onBeforeEnter">
+  <f-page @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
     <div class="full-page flex-center bg-warm-white">
       <img
         id="arc"
@@ -106,15 +106,19 @@ export default {
       toMotionFade("#cover-scroll-down");
     });
     function onload() {
-      timeline.play();
+      if (currentPage.value === 0) timeline.play();
     }
     function onBeforeEnter() {
-      gsap.to(refs.register, registerCenterState);
+      if (timeline.paused()) timeline.resume();
+      else gsap.to(refs.register, registerCenterState);
+    }
+    function onBeforeLeave() {
+      if (timeline.isActive()) timeline.pause();
     }
     function next() {
       nextPage();
     }
-    return { onload, onBeforeEnter, next };
+    return { onload, onBeforeEnter, next, onBeforeLeave };
   }
 };
 </script>

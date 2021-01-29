@@ -6,7 +6,7 @@
       :key="n"
       class="hive-slide-bullet"
       :class="{ 'hive-slide-bullet--active': currentSlide === n - 1 }"
-      @click="handleClick(n + 1)"
+      @click="handleClick(n - 1)"
     />
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
     // eslint-disable-next-line vue/no-setup-props-destructure
     const controller = props.controller;
     function handleClick(n) {
+      console.log(n);
       controller.slideTo(n);
     }
 

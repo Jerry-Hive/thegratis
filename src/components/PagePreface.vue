@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { hiveTimeline } from "@/gsapUtils";
+import { hiveTimeline } from "@/utils/gsapUtils";
 import { registerTimeline } from "@/fullpageScroll/fullPage";
 import FPage from "@/fullpageScroll/FPage";
 
