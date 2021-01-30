@@ -156,7 +156,7 @@ export function registerPage() {
   const instance = getCurrentInstance();
   const uid = instance.uid;
   pages.push(uid);
-  console.log("page registered", uid);
+  // console.log("page registered", uid);
   pageMap[uid] = {
     instance: instance
   };
@@ -176,7 +176,7 @@ export function registerTimeline(timeline, reset = true) {
 }
 function playTimelines(instance) {
   const uid = instance.uid;
-  console.log("play", uid);
+  // console.log("play", uid);
   const tls = timelines[uid];
   // console.log(timelines);
   if (tls && tls.length) {

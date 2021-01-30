@@ -30,6 +30,7 @@ const staticPins = [
     dotSize: 15
   })
 ];
+console.log(staticPins);
 export default {
   name: "page-aerial",
   components: {

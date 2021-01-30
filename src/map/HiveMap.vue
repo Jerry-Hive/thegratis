@@ -19,32 +19,36 @@
         :dotSize="dynamicPinsStyle.dotSize"
         :show="showPins"
       ></map-pin-thin-line>
-      <!--      <hive-map-pin-static-->
-      <!--        class="pin"-->
-      <!--        v-for="(pin, index) in staticPins"-->
-      <!--        :inDelay="index * 500 + 10"-->
-      <!--        :key="pin.x"-->
-      <!--        :x="pin.x"-->
-      <!--        :y="pin.y"-->
-      <!--        :labelUrl="pin.labelUrl"-->
-      <!--        :labelText="pin.labelText"-->
-      <!--        :labelStyle="pin.labelStyle"-->
-      <!--        :labelClasses="pin.labelClasses"-->
-      <!--        :topLocation="pin.topLocation"-->
-      <!--        :color="pin.color"-->
-      <!--        :dotSize="pin.dotSize"-->
-      <!--      ></hive-map-pin-static>-->
+      <map-pin-static-thin-line
+        class="pin"
+        v-for="(pin, index) in staticPins"
+        :inDelay="index * 500 + 10"
+        :key="pin.x"
+        :x="pin.x"
+        :y="pin.y"
+        :scale="mapState.scale"
+        :origin-x="mapState.originX"
+        :origin-y="mapState.originY"
+        :labelUrl="pin.labelUrl"
+        :labelText="pin.labelText"
+        :labelStyle="pin.labelStyle"
+        :labelClasses="pin.labelClasses"
+        :topLocation="pin.topLocation"
+        :color="pin.color"
+        :dotSize="pin.dotSize"
+        :show="showPins"
+      ></map-pin-static-thin-line>
     </div>
     <div ref="viewport" class="viewport">
-      <img ref="image" :src="src" @load="imageLoad" alt="" />
+      <img ref="image" :src="src" @load="adjust" alt="" />
     </div>
   </div>
 </template>
 <script>
-import { computed, onUnmounted, reactive, ref, watch } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 import MapPinThinLine from "@/map/MapPinThinLine";
-import { getComputedStyle } from "@/utils/domUtils";
 import { useElementSize } from "@vueuse/core";
+import MapPinStaticThinLine from "@/map/MapPinStaticThinLine";
 
 export default {
   name: "hive-map",
@@ -56,6 +60,7 @@ export default {
     onStage: { type: Boolean, default: false }
   },
   components: {
+    MapPinStaticThinLine,
     MapPinThinLine
   },
   setup(props) {
@@ -71,34 +76,32 @@ export default {
       loaded: false
     });
     const showPins = computed(() => {
-      console.log(mapState.loaded && props.onStage);
       return mapState.loaded && props.onStage;
     });
-    function imageLoad() {
-      console.log("imageLoaded");
-      mapState.loaded = true;
-      // window.addEventListener("resize", fitImage);
-    }
-    onUnmounted(() => {
-      // window.removeEventListener("resize", fitImage);
-    });
+
     const { width, height } = useElementSize(container);
     watch(
       [width, height],
       () => {
-        console.log(width.value, height.value);
         if (!width.value) return;
-        if (!originalWidth) {
-          originalWidth = image.value.offsetWidth;
-          originalHeight = image.value.offsetHeight;
-        }
-        fitImage();
+        adjust();
       },
       { immediate: true }
     );
+    function initImage() {
+      if (originalHeight) return;
+      const width = image.value.offsetWidth;
+      if (!width) return;
+      originalWidth = width;
+      originalHeight = image.value.offsetHeight;
+      mapState.loaded = true;
+    }
+    function adjust() {
+      initImage();
+      if (mapState.loaded) fitImage();
+    }
     function fitImage() {
-      console.log(getComputedStyle(image.value, "display"));
-      console.log(width, height);
+      // console.log(width, height);
       const containerWidth = container.value.offsetWidth;
       const containerHeight = container.value.offsetHeight;
 
@@ -108,7 +111,6 @@ export default {
 
       let w = scale * originalWidth;
       let h = scale * originalHeight;
-      console.log("fitImage", w, h);
       const style = image.value.style;
       style.width = w + "px";
       style.height = h + "px";
@@ -121,8 +123,10 @@ export default {
     }
     function handleClick(e) {
       console.log(
-        (e.clientX + this.originX) / this.scale,
-        (e.clientY + this.originY) / this.scale
+        "x",
+        (e.clientX + mapState.originX) / mapState.scale,
+        "y",
+        (e.clientY + mapState.originY) / mapState.scale
       );
     }
     return {
@@ -131,7 +135,7 @@ export default {
       container,
       mapState,
       handleClick,
-      imageLoad,
+      adjust,
       showPins
     };
   }
