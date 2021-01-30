@@ -12,12 +12,6 @@
       style="width:42vh;margin-top:1.5vh;z-index:400"
       :controller="controller"
     />
-    <!--    <hive-slider-bullets-->
-    <!--      ref="bullets"-->
-    <!--      :total="slides.length"-->
-    <!--      @jump="handleJump"-->
-    <!--      style="position:absolute;top:80vh;z-index:400;width:42vh;margin-top:1.5vh"-->
-    <!--    ></hive-slider-bullets>-->
   </div>
 </template>
 
