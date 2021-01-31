@@ -6,6 +6,7 @@ import {
   computed
 } from "vue";
 import gsap from "gsap";
+import { pauseAllVideos, playAllVideos } from "@/utils/domUtils";
 
 function setStyle(element, obj) {
   for (const [key, value] of Object.entries(obj)) {
@@ -106,6 +107,9 @@ function move(step) {
   const toInstance = pageMap[toId].instance;
   fromInstance.emit("before-leave");
   toInstance.emit("before-enter");
+
+  pauseAllVideos(fromContainer);
+
   resetTimelines(toInstance);
   setTimeout(() => {
     if (step < 0) {
@@ -131,6 +135,7 @@ function move(step) {
       fromInstance.emit("left");
       toInstance.emit("entered");
       // console.log("entered", toInstance);
+      playAllVideos(toContainer);
       playTimelines(toInstance);
       adjustDummy();
     },

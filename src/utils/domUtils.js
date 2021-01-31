@@ -2,7 +2,7 @@ export function getComputedStyle(element, value) {
   const s = window.getComputedStyle(element);
   return s.getPropertyValue(value);
 }
-export function pauseAllVideo(element) {
+export function pauseAllVideos(element) {
   const videos = element.querySelectorAll("video"); // get all videos using "video" css selector
   /*Loop*/
   for (let video of videos) {
@@ -10,7 +10,7 @@ export function pauseAllVideo(element) {
     video.pause();
   }
 }
-export function playAllVideo(element) {
+export function playAllVideos(element) {
   const videos = element.querySelectorAll("video"); // get all videos using "video" css selector
   /*Loop*/
   for (let video of videos) {

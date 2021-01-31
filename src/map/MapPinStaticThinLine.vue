@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="pointer-events: none;user-select: none">
     <div
       ref="dot"
       class="origin-center dot"

@@ -1,5 +1,5 @@
 <template>
-  <div style="position:relative;" ref="root"></div>
+  <div style="position:relative;user-select: none;" ref="root"></div>
 </template>
 
 <script>

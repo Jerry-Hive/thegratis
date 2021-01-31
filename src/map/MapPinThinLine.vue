@@ -3,6 +3,7 @@
     ref="container"
     id="container"
     :style="{ top: location.y + 'px', left: location.x + 'px' }"
+    style="user-select: none"
   >
     <div
       class="dummy-mouse-receiver"
