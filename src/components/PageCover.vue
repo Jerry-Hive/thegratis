@@ -12,6 +12,7 @@
 
       <img
         id="hero"
+        ref="hero"
         class="absolute"
         src="@/assets/i-hero.png"
         style="height:45vh;top:5vh;z-index:10"
@@ -19,6 +20,7 @@
       <img
         src="@/assets/logo-dark.png"
         id="cover-logo"
+        ref="logo"
         class="absolute z-top"
         style="height:5.5vh;top:47vh;"
       />
@@ -26,11 +28,13 @@
       <img
         src="@/assets/deepdene.png"
         id="cover-deepdene"
+        ref="deepdene"
         class="absolute z-top"
         style="height:1.6vh;top:54vh"
       />
       <scroll-down-ani
         id="cover-scroll-down"
+        ref="scrollDown"
         class="absolute z-top hand"
         style="top:70.5vh"
         @click="next"

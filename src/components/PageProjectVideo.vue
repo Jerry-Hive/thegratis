@@ -1,5 +1,5 @@
 <template>
-  <f-page>
+  <f-page hash="videos">
     <background-video class="full-size" />
   </f-page>
 </template>

@@ -1,0 +1,16 @@
+.full-size{
+  width:100%;
+  height:100%;
+}
+.relative{
+  position:relative;
+}
+.absolute{
+  position:absolute;
+}
+.z-modal{
+  z-index: 99999999999999999999999999999999999999;
+}
+.z-top{
+  z-index: 10000;
+}

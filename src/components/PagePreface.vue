@@ -1,5 +1,5 @@
 <template>
-  <f-page class="flex-center bg-warm-white full-page">
+  <f-page hash="preface" class="flex-center bg-warm-white full-page">
     <div
       class="absolute caslon text-center text-navy full-width"
       style="top:30vh;font-size: 3vh"

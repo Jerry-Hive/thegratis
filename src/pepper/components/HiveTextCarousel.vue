@@ -1,11 +1,14 @@
 <template>
-  <div style="position:relative;user-select: none;" ref="root"></div>
+  <div
+    style="position:relative;user-select: none; overflow: hidden"
+    ref="root"
+  ></div>
 </template>
 
 <script>
-import HiveFader from "@/utils/HiveFader";
+import HiveFader from "./controllers/HiveFader";
 import { onMounted, ref, watch } from "vue";
-import { setStyle } from "@/utils/domUtils";
+import { setStyle } from "../utils/domUtils";
 export default {
   name: "hive-text-carousel",
   props: {
@@ -24,11 +27,14 @@ export default {
     const root = ref(null);
     let currentFader;
     onMounted(() => {
+      let height = 0;
       for (let label in props.content) {
         const content = props.content[label];
         const div = document.createElement("div");
         div.innerHTML = content;
         root.value.append(div);
+        const h = div.clientHeight;
+        if (h > height) height = h;
         const fader = new HiveFader(div, {
           xOffset: "10px",
           duration: props.speed
@@ -41,9 +47,11 @@ export default {
         });
         faders[label] = fader;
       }
+      root.value.style.height = height + "px";
       watch(
         () => props.currentLabel,
         label => {
+          // console.log(label);
           jumpTo(label);
         },
         { immediate: true }

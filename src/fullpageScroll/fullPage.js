@@ -3,10 +3,12 @@ import {
   onMounted,
   reactive,
   onUnmounted,
-  computed
+  computed,
+  watch
 } from "vue";
 import gsap from "gsap";
 import { pauseAllVideos, playAllVideos } from "@/utils/domUtils";
+import { removeHash } from "@/pepper/utils/routerUtils";
 
 function setStyle(element, obj) {
   for (const [key, value] of Object.entries(obj)) {
@@ -20,8 +22,10 @@ function setStyle(element, obj) {
  */
 export const pages = [];
 const pageMap = {};
+const hashMap = {};
 const state = reactive({
-  currentPage: 0
+  currentPage: 0,
+  hash: undefined
 });
 let dummy;
 let scrolling = false;
@@ -34,6 +38,16 @@ export function getCurrentPage() {
 }
 export function getTotalPages() {
   return pages.length;
+}
+
+function updateCurrentPageByHash() {
+  for (let i = 0; i < pages.length; i++) {
+    const uid = pages[i];
+    if (pageMap[uid].hash === state.hash) {
+      state.currentPage = i;
+      break;
+    }
+  }
 }
 export function init() {
   if (!dummy) {
@@ -50,16 +64,33 @@ export function init() {
       position: "absolute",
       "z-index": -1
     });
-    const firstPage = pageMap[pages[0]].container;
-    const firstPageInstance = pageMap[pages[0]].instance;
-    setStyle(firstPage, { display: "block" });
+    handleHashChange();
+    console.log(state.currentPage);
+    const uid = pages[state.currentPage];
+    const firstContainer = pageMap[uid].container;
+    console.log(firstContainer);
+    const firstPageInstance = pageMap[uid].instance;
+    playAllVideos(firstContainer);
+    gsap.set(firstContainer, { display: "flex", top: 0 });
+    adjustDummy();
+    console.log("set top");
+    firstPageInstance.emit("before-enter");
     firstPageInstance.emit("entered");
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", adjustDummy);
+    window.addEventListener("hashchange", handleHashChange, false);
+    watch(
+      () => state.currentPage,
+      (to, from) => {
+        console.log("move page from " + from + " to: " + to);
+        move(from, to);
+      }
+    );
   });
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll);
     window.removeEventListener("resize", adjustDummy);
+    window.removeEventListener("hashchange", handleHashChange, false);
   });
 }
 function handleScroll(e) {
@@ -67,6 +98,7 @@ function handleScroll(e) {
     e.preventDefault();
     return false;
   }
+  console.log("scrolling");
   const y = window.scrollY;
   // console.log("scrollY", scrollY, y);
   const diff = y - scrollY;
@@ -80,26 +112,34 @@ function handleScroll(e) {
   if (Math.abs(step) < 1) {
     step = diff > 0 ? 1 : -1;
   }
-  move(step);
+  state.currentPage += step;
   scrollY = y;
 }
+function handleHashChange() {
+  const hash = location.hash;
+  if (hash && hash.length) {
+    console.log("got hash: ", hash);
+    state.hash = hash.substr(1);
+    updateCurrentPageByHash();
+  }
+}
 export function nextPage() {
-  move(1);
+  state.currentPage++;
 }
 export function prevPage() {
-  move(-1);
+  state.currentPage--;
 }
 export function firstPage() {
   move(-state.currentPage);
 }
-function move(step) {
-  const from = state.currentPage;
-  state.currentPage += step;
-  const to = state.currentPage;
+function move(from, to) {
+  console.log("move", from, to);
   const fromId = pages[from];
   const toId = pages[to];
   const fromContainer = pageMap[fromId].container;
   const toContainer = pageMap[toId].container;
+  const hash = pageMap[toId].hash;
+  const step = to - from;
   const fromTop = step > 0 ? "-100vh" : "100vh";
   const toTop = step > 0 ? "100vh" : "-100vh";
   //"before-enter","entered","before-leave","left"
@@ -138,6 +178,8 @@ function move(step) {
       playAllVideos(toContainer);
       playTimelines(toInstance);
       adjustDummy();
+      if (hash) location.hash = hash;
+      else removeHash();
     },
     ease: "power4.out",
     duration: 1
@@ -147,24 +189,29 @@ function move(step) {
 function adjustDummy() {
   scrolling = true;
   // Hivue.log("to " + to);
+  scrollDummy();
+  setTimeout(() => {
+    scrolling = false;
+  }, 100);
+}
+function scrollDummy() {
   setStyle(dummy, { display: "block", height: pages.length * 100 + "vh" });
   const vh = window.innerHeight;
   const to = state.currentPage * vh;
   window.scrollTo(0, to);
 
   scrollY = to;
-  setTimeout(() => {
-    scrolling = false;
-  }, 100);
 }
-export function registerPage() {
+export function registerPage(hash) {
   const instance = getCurrentInstance();
   const uid = instance.uid;
   pages.push(uid);
   // console.log("page registered", uid);
   pageMap[uid] = {
-    instance: instance
+    instance: instance,
+    hash: hash
   };
+  hashMap[hash] = uid;
   onMounted(() => {
     const container = instance.refs.container;
     pageMap[uid].container = container;

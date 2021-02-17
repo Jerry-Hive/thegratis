@@ -1,40 +1,40 @@
 {
-	"imageRoot": "/images/renders/",
+	"imageRoot": "/images/renders",
 	"slides": [
 		{
-			"img": "entry",
+			"img": "entry.jpg",
 			"title": "The Grand Entrance",
-			"who": "ns"
+			"label": "ns"
 		},
 		{
-			"img": "kitchen-ns",
+			"img": "kitchen-ns.jpg",
 			"title": "Kitchen (Signature Range) - by Embrace Architects",
-			"who": "ns"
+			"label": "ns"
 		},
 		{
-			"img": "kitchen-ab",
+			"img": "kitchen-ab.jpg",
 			"title": "Kitchen (Prestige Range) - by Adele Bates",
-			"who": "ab"
+			"label": "ab"
 		},
 		{
-			"img": "fireplace-ph",
+			"img": "fireplace-ph.jpg",
 			"title": "Living",
-			"who": "ab"
+			"label": "ab"
 		},
 		{
-			"img": "bedroom",
+			"img": "bedroom.jpg",
 			"title": "Master Bedroom",
-			"who": "ab"
+			"label": "ab"
 		},
 		{
-			"img": "dining",
+			"img": "dining.jpg",
 			"title": "Dining",
-			"who": "jm"
+			"label": "jm"
 		},
 		{
-			"img": "backyard2",
+			"img": "backyard2.jpg",
 			"title": "Ground Floor Terrace",
-			"who": "jm"
+			"label": "jm"
 		}
 	],
 	"people": {

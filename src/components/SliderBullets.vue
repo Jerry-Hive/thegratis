@@ -13,24 +13,24 @@
 
 <script>
 // import { TweenLite, Power2 } from "gsap/all";
+import { injectPhotoSliderStore } from "@/pepper/components/stores/hivePhotoSliderStore";
+import { computed } from "vue";
+
 export default {
   name: "SliderBullets",
   components: {},
-  props: {
-    controller: Object
-  },
-  setup(props) {
+  setup() {
     // eslint-disable-next-line vue/no-setup-props-destructure
-    const controller = props.controller;
+    const store = injectPhotoSliderStore();
     function handleClick(n) {
       console.log(n);
-      controller.slideTo(n);
+      store.goto(n);
     }
 
     return {
       handleClick,
-      currentSlide: controller.currentSlide,
-      totalSlides: controller.totalSlides
+      currentSlide: computed(() => store.state.cursor),
+      totalSlides: computed(() => store.photos.length)
     };
   }
 };

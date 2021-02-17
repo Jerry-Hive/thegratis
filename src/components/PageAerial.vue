@@ -1,5 +1,5 @@
 <template>
-  <f-page @entered="entered" @left="left">
+  <f-page hash="aerial" @entered="entered" @left="left">
     <hive-map
       :on-stage="state.onStage"
       ref="map"

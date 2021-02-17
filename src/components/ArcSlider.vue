@@ -1,41 +1,24 @@
 <template>
   <div class="container flex-center">
     <div class="slider-container relative">
-      <div class="slider-container" ref="sliderContainer"></div>
+      <hive-photo-slider-headless class="slider-container" debug />
       <img
         src="@/assets/arc-tight.png"
         class="arc-cover disable-events disable-select"
         alt=""
       />
     </div>
-    <slider-bullets
-      style="width:42vh;margin-top:1.5vh;z-index:400"
-      :controller="controller"
-    />
+    <slider-bullets style="width:42vh;margin-top:1.5vh;z-index:400" />
   </div>
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
-import SliderBullets from "@/slider/SliderBullets";
+import SliderBullets from "./SliderBullets";
+import HivePhotoSliderHeadless from "@/pepper/components/HivePhotoSliderHeadless";
 
 export default {
   name: "ArcSlider",
-  components: { SliderBullets },
-  props: {
-    controller: Object
-  },
-  setup(props) {
-    const sliderContainer = ref(null);
-    // eslint-disable-next-line vue/no-setup-props-destructure
-    const controller = props.controller;
-    onMounted(() => {
-      controller.install(sliderContainer.value);
-    });
-    return {
-      sliderContainer
-    };
-  }
+  components: { HivePhotoSliderHeadless, SliderBullets }
 };
 </script>
 <style scoped lang="scss">

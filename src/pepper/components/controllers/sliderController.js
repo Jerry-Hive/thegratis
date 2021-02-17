@@ -1,9 +1,17 @@
-import { reactive, toRefs } from "vue";
+/**
+ * Deprecated. Use hivePhotoSliderStore.
+ */
+
+import { getCurrentInstance, isRef, reactive, toRefs } from "vue";
 import gsap from "gsap";
+import { when, invoke } from "@vueuse/core";
+import { getComputedStyleValue } from "../../utils/domUtils";
+// import { tryOnUnmounted } from "@vueuse/shared";
 
 export function useSliderController(slides = [], options = {}) {
-  const { autoPlay = false, speed = 1, delay = 3 } = options;
+  const { autoPlay = false, speed = 1, delay = 3, cover = true } = options;
   let intervalId;
+  let instance;
   const state = reactive({
     currentSlide: 0
   });
@@ -22,7 +30,7 @@ export function useSliderController(slides = [], options = {}) {
   }
   function slideTo(index) {
     goto(index);
-    play();
+    if (!paused) play();
   }
   function next() {
     slideTo(state.currentSlide + 1);
@@ -37,6 +45,7 @@ export function useSliderController(slides = [], options = {}) {
     } else if (to < 0) {
       to = slides.length - 1;
     }
+    if (instance) instance.emit("slide", to);
     const outSlider = sliderContainers[currentSlideContainer];
     currentSlideContainer = 1 - currentSlideContainer;
     const inSlider = sliderContainers[currentSlideContainer];
@@ -56,20 +65,25 @@ export function useSliderController(slides = [], options = {}) {
   const sliderContainers = [];
 
   function setImage(div, index) {
-    console.log("setImage", index, slides[index]);
+    // console.log("setImage", index, slides[index]);
     const style = div.style;
     style.backgroundImage = "url('" + slides[index] + "')";
   }
-  function install(container) {
+  function doInstall(container) {
     const style = container.style;
-    style.position = "relative";
+
+    const position = getComputedStyleValue(container, "position");
+    if (position !== "fixed" && position !== "absolute") {
+      style.position = "relative";
+    }
     for (let i = 0; i < 2; i++) {
       const slideDiv = document.createElement("div");
       container.append(slideDiv);
       gsap.set(slideDiv, {
         width: "100%",
-        "background-size": "cover",
+        "background-size": cover ? "cover" : "contain",
         "background-position": "center",
+        "background-repeat": "no-repeat",
         height: "100%",
         position: "absolute",
         left: 0,
@@ -77,8 +91,9 @@ export function useSliderController(slides = [], options = {}) {
         opacity: 0,
         "user-select": "none"
       });
-      sliderContainers.push(slideDiv);
+      sliderContainers[i] = slideDiv;
     }
+    console.log(sliderContainers);
     goto(0);
     if (autoPlay) play();
     container.addEventListener("swiped-left", () => {
@@ -87,6 +102,23 @@ export function useSliderController(slides = [], options = {}) {
     container.addEventListener("swiped-right", () => {
       prev();
     });
+  }
+  function install(container) {
+    instance = getCurrentInstance();
+    if (isRef(container)) {
+      if (container.value) {
+        doInstall(container.value);
+      } else {
+        invoke(async () => {
+          await when(container).toBeTruthy();
+          console.log("go..........");
+          doInstall(container.value);
+        });
+      }
+    } else {
+      doInstall(container);
+    }
+    // tryOnUnmounted(() => {});
   }
   const { currentSlide } = toRefs(state);
   return {

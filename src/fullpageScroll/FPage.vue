@@ -14,10 +14,11 @@ export default {
   props: {
     pageId: {
       type: String
-    }
+    },
+    hash: String
   },
-  setup() {
-    registerPage();
+  setup(props) {
+    registerPage(props.hash);
     const container = ref(null);
     return {
       container
