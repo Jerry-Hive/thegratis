@@ -40,13 +40,10 @@
 <script>
 import FPage from "@/fullpageScroll/FPage";
 import HiveTextCarousel from "@/pepper/components/HiveTextCarousel";
-import {
-  createPhotoSliderStore,
-  providePhotoSliderStore
-} from "@/pepper/components/stores/hivePhotoSliderStore";
+import { createPhotoSliderStore } from "@/pepper/components/stores/hivePhotoSliderStore";
 import ArcSlider from "./ArcSlider";
 import { useWindowSize } from "@vueuse/core";
-import { computed, ref, watch } from "vue";
+import { computed, provide, ref, watch } from "vue";
 export default {
   name: "PageArcSlider",
   props: {
@@ -73,7 +70,7 @@ export default {
       photos,
       cover: true
     });
-    providePhotoSliderStore(store);
+    provide("hive-photo-slider-controller", store);
     watch(
       () => store.state.cursor,
       index => {

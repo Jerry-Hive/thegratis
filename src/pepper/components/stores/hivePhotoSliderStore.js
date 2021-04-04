@@ -1,4 +1,4 @@
-import { inject, provide, reactive } from "vue";
+import { reactive } from "vue";
 
 export const createPhotoSliderStore = ({
   photos = [],
@@ -59,10 +59,4 @@ export const createPhotoSliderStore = ({
     next,
     prev
   };
-};
-export const providePhotoSliderStore = store => {
-  provide("hive-photo-slider-controller", store);
-};
-export const injectPhotoSliderStore = () => {
-  return inject("hive-photo-slider-controller");
 };

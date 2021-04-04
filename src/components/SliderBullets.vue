@@ -13,15 +13,15 @@
 
 <script>
 // import { TweenLite, Power2 } from "gsap/all";
-import { injectPhotoSliderStore } from "@/pepper/components/stores/hivePhotoSliderStore";
-import { computed } from "vue";
-
+// import { injectPhotoSliderStore } from "@/pepper/components/stores/hivePhotoSliderStore";
+import { computed, inject } from "vue";
+const injectionKey = "hive-photo-slider-controller";
 export default {
   name: "SliderBullets",
   components: {},
   setup() {
     // eslint-disable-next-line vue/no-setup-props-destructure
-    const store = injectPhotoSliderStore();
+    const store = inject(injectionKey);
     function handleClick(n) {
       console.log(n);
       store.goto(n);

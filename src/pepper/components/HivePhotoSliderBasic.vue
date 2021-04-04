@@ -47,11 +47,8 @@
 
 <script>
 import HivePhotoSliderHeadless from "@/pepper/components/HivePhotoSliderHeadless";
-import { computed, onMounted, onUnmounted } from "vue";
-import {
-  createPhotoSliderStore,
-  providePhotoSliderStore
-} from "@/pepper/components/stores/hivePhotoSliderStore";
+import { computed, onMounted, onUnmounted, provide } from "vue";
+import { createPhotoSliderStore } from "@/pepper/components/stores/hivePhotoSliderStore";
 import IconChevron from "@/pepper/icons/IconChevron";
 
 export default {
@@ -76,7 +73,7 @@ export default {
       cover: props.cover,
       keyEvent: props.keyEvent
     });
-    providePhotoSliderStore(store);
+    provide("hive-photo-slider-controller", store);
     onMounted(() => {
       if (props.autoPlay) store.play();
     });

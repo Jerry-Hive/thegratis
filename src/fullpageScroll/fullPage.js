@@ -9,6 +9,7 @@ import {
 import gsap from "gsap";
 import { pauseAllVideos, playAllVideos } from "@/utils/domUtils";
 import { removeHash } from "@/pepper/utils/routerUtils";
+import { fadeToInvisible } from "@/pepper/animation/utils";
 
 function setStyle(element, obj) {
   for (const [key, value] of Object.entries(obj)) {
@@ -30,6 +31,8 @@ const state = reactive({
 let dummy;
 let scrolling = false;
 let scrollY = 0;
+let movingOutContainer;
+let movingInContainer;
 export function useCurrentPage() {
   return computed(() => state.currentPage);
 }
@@ -73,7 +76,6 @@ export function init() {
     playAllVideos(firstContainer);
     gsap.set(firstContainer, { display: "flex", top: 0 });
     adjustDummy();
-    console.log("set top");
     firstPageInstance.emit("before-enter");
     firstPageInstance.emit("entered");
     window.addEventListener("scroll", handleScroll);
@@ -148,6 +150,25 @@ function move(from, to) {
   fromInstance.emit("before-leave");
   toInstance.emit("before-enter");
 
+  if (movingInContainer) {
+    gsap.killTweensOf(movingInContainer);
+    if (
+      movingInContainer !== fromContainer &&
+      movingInContainer !== toContainer
+    ) {
+      fadeToInvisible(movingInContainer);
+    }
+  }
+  if (movingOutContainer) {
+    gsap.killTweensOf(movingOutContainer);
+    if (
+      movingOutContainer !== fromContainer &&
+      movingOutContainer !== toContainer
+    ) {
+      fadeToInvisible(movingOutContainer);
+    }
+  }
+
   pauseAllVideos(fromContainer);
 
   resetTimelines(toInstance);
@@ -160,9 +181,15 @@ function move(from, to) {
     }
   }, 100);
 
+  gsap.killTweensOf(toContainer);
+  gsap.killTweensOf(fromContainer);
+  movingOutContainer = fromContainer;
+  movingInContainer = toContainer;
   gsap.set(toContainer, {
     top: toTop,
-    display: "flex"
+    display: "flex",
+    visibility: "visible",
+    opacity: 1
   });
   gsap.to(fromContainer, {
     top: fromTop,
@@ -172,6 +199,8 @@ function move(from, to) {
   gsap.to(toContainer, {
     top: 0,
     onComplete() {
+      movingOutContainer = movingInContainer = null;
+
       fromInstance.emit("left");
       toInstance.emit("entered");
       // console.log("entered", toInstance);

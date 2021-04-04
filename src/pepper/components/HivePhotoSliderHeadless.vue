@@ -20,22 +20,23 @@
 </template>
 
 <script>
-import { onMounted, watch, onUnmounted } from "vue";
+import { onMounted, inject, watch, onUnmounted } from "vue";
 import gsap from "gsap";
 import { templateRef } from "@vueuse/core";
-import { injectPhotoSliderStore } from "@/pepper/components/stores/hivePhotoSliderStore";
+
+const injectionKey = "hive-photo-slider-controller";
 export default {
   emits: ["slide"],
   name: "HivePhotoSliderHeadless",
-  props: { autoPlay: Boolean, debug: Boolean },
+  props: { autoPlay: Boolean },
   setup(props, ctx) {
     let currentSlideContainer = 0;
     const sliderContainers = [];
     const slider1 = templateRef("slider1");
     const slider2 = templateRef("slider2");
-    const store = injectPhotoSliderStore();
+    const store = inject(injectionKey);
     function setImage(div, index) {
-      if (props.debug) console.log("setImage", index, store.photos[index]);
+      // console.log("setImage", index, slides[index]);
       const style = div.style;
       style.backgroundImage = "url('" + store.photos[index] + "')";
     }
