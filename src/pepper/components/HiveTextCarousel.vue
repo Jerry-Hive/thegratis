@@ -8,7 +8,8 @@
 <script>
 import HiveFader from "./controllers/HiveFader";
 import { onMounted, ref, watch } from "vue";
-import { setStyle } from "../utils/domUtils";
+import { setStyle } from "@/pepper/utils/domUtils";
+import { useElementSize } from "@vueuse/core";
 export default {
   name: "hive-text-carousel",
   props: {
@@ -24,15 +25,29 @@ export default {
   },
   setup(props) {
     const faders = {};
+    const divs = [];
     const root = ref(null);
     let currentFader;
+    const { width } = useElementSize(root);
+    watch(width, () => {
+      let height = 0;
+      for (let i = 0; i < divs.length; i++) {
+        const div = divs[i];
+        const h = div.clientHeight;
+        if (h > height) height = h;
+      }
+      root.value.style.height = height + "px";
+    });
     onMounted(() => {
       let height = 0;
       for (let label in props.content) {
         const content = props.content[label];
         const div = document.createElement("div");
         div.innerHTML = content;
+
+        console.log(content);
         root.value.append(div);
+        divs.push(div);
         const h = div.clientHeight;
         if (h > height) height = h;
         const fader = new HiveFader(div, {

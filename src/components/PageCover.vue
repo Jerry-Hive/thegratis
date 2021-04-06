@@ -6,7 +6,7 @@
         ref="arc"
         src="@/assets/arc.png"
         class="absolute"
-        style="height:45vh;top:-95vh;z-index:20; box-sizing: content-box;border:100vh solid #edd9d0"
+        style="height:45vh;top:-95vh;z-index:20; box-sizing: content-box;border:100vh solid #edd9d0;border-right: 100vw solid #edd9d0;border-left: 100vw solid #edd9d0;"
         @load="onload"
       />
 

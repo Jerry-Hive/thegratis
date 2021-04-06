@@ -1,4 +1,4 @@
-import { getComputedStyle, setStyle } from "@/utils/domUtils";
+import { getComputedStyle, setStyle } from "./domUtils";
 
 const defaultOptions = {
   xOffset: "0px",

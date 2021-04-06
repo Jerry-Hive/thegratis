@@ -15,8 +15,9 @@
             class="caslon h1"
             :content="titles"
             :current-label="currentSlide"
-            style="width:100%;height:5vh"
+            style="width:100%;"
           ></hive-text-carousel>
+          <br /><br />
           <div class="caslon h2 italic" style="height:20vh">
             <div class="quote">
               <hive-text-carousel
@@ -24,7 +25,7 @@
                 class="caslon h1"
                 :content="texts"
                 :current-label="currentLabel"
-                style="width:100%;height:10vh"
+                style="width:100%;"
               ></hive-text-carousel>
             </div>
           </div>

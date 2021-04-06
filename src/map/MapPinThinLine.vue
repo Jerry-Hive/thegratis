@@ -41,7 +41,7 @@
 
 <script>
 import { computed, onMounted, ref, watch } from "vue";
-import HiveFader from "@/utils/HiveFader";
+import HiveFader from "@/pepper/utils/HiveFader";
 export default {
   name: "MapPinThinLine",
   props: {

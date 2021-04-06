@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import HiveFader from "@/utils/HiveFader";
+import HiveFader from "@/pepper/utils/HiveFader";
 import { computed, onMounted, ref, watch } from "vue";
 
 export default {

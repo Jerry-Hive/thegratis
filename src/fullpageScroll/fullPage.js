@@ -7,7 +7,7 @@ import {
   watch
 } from "vue";
 import gsap from "gsap";
-import { pauseAllVideos, playAllVideos } from "@/utils/domUtils";
+import { pauseAllVideos, playAllVideos } from "@/pepper/utils/domUtils";
 import { removeHash } from "@/pepper/utils/routerUtils";
 import { fadeToInvisible } from "@/pepper/animation/utils";
 
