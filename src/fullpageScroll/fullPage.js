@@ -178,7 +178,7 @@ function move(from, to) {
 
   pauseAllVideos(fromContainer);
 
-  resetTimelines(toInstance);
+  // resetTimelines(toInstance);
   setTimeout(() => {
     if (step < 0) {
       setStyle(dummy, { height: "110vh" });
@@ -212,7 +212,7 @@ function move(from, to) {
       toInstance.emit("entered");
       // console.log("entered", toInstance);
       playAllVideos(toContainer);
-      playTimelines(toInstance);
+      // playTimelines(toInstance);
       adjustDummy();
       if (hash) location.hash = hash;
       else removeHash();
@@ -254,46 +254,46 @@ export function registerPage(hash) {
     setStyle(container, { position: "absolute", left: "0", display: "none" });
   });
 }
-const timelines = {};
-export function registerTimeline(timeline, reset = true) {
-  const instance = getCurrentInstance();
-  // console.log(instance.parent.type);
-  const uid = instance.uid;
-  if (!timelines[uid]) timelines[uid] = [];
-  timelines[uid].push({ timeline, reset });
-}
-function playTimelines(instance) {
-  const uid = instance.uid;
-  // console.log("play", uid);
-  const tls = timelines[uid];
-  // console.log(timelines);
-  if (tls && tls.length) {
-    for (let i = 0; i < tls.length; i++) {
-      const { timeline } = tls[i];
-      timeline.play();
-    }
-  }
-  const parent = instance.parent;
-  if (parent) {
-    if (parent.type.name !== "f-page-viewport") playTimelines(parent);
-  }
-}
-function resetTimelines(instance) {
-  const uid = instance.uid;
-  const tls = timelines[uid];
-  if (tls && tls.length) {
-    for (let i = 0; i < tls.length; i++) {
-      const { timeline, reset } = tls[i];
-      if (reset) {
-        timeline.reset();
-      }
-    }
-  }
-  const parent = instance.parent;
-  if (parent) {
-    if (parent.type.name !== "f-page-viewport") resetTimelines(parent);
-  }
-}
+// const timelines = {};
+// export function registerTimeline(timeline, reset = true) {
+//   const instance = getCurrentInstance();
+//   // console.log(instance.parent.type);
+//   const uid = instance.uid;
+//   if (!timelines[uid]) timelines[uid] = [];
+//   timelines[uid].push({ timeline, reset });
+// }
+// function playTimelines(instance) {
+//   const uid = instance.uid;
+//   // console.log("play", uid);
+//   const tls = timelines[uid];
+//   // console.log(timelines);
+//   if (tls && tls.length) {
+//     for (let i = 0; i < tls.length; i++) {
+//       const { timeline } = tls[i];
+//       timeline.play();
+//     }
+//   }
+//   const parent = instance.parent;
+//   if (parent) {
+//     if (parent.type.name !== "f-page-viewport") playTimelines(parent);
+//   }
+// }
+// function resetTimelines(instance) {
+//   const uid = instance.uid;
+//   const tls = timelines[uid];
+//   if (tls && tls.length) {
+//     for (let i = 0; i < tls.length; i++) {
+//       const { timeline, reset } = tls[i];
+//       if (reset) {
+//         timeline.reset();
+//       }
+//     }
+//   }
+//   const parent = instance.parent;
+//   if (parent) {
+//     if (parent.type.name !== "f-page-viewport") resetTimelines(parent);
+//   }
+// }
 // const overlayStates = {};
 // const overlayHijacks = {};
 // export function registerOverlayState(target, state) {
