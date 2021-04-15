@@ -45,7 +45,7 @@ export default {
         const div = document.createElement("div");
         div.innerHTML = content;
 
-        console.log(content);
+        // console.log(content);
         root.value.append(div);
         divs.push(div);
         const h = div.clientHeight;

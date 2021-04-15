@@ -1,5 +1,11 @@
 <template>
-  <f-page hash="preface" class="flex-center bg-warm-white full-page">
+  <f-page
+    hash="preface"
+    class="flex-center bg-warm-white full-page"
+    @before-enter="beforeEnter"
+    @entered="entered"
+    @before-leave="beforeLeave"
+  >
     <div
       class="absolute caslon text-center text-navy full-width"
       style="top:30vh;font-size: 3vh"
@@ -27,7 +33,7 @@
 
 <script>
 import { hiveTimeline } from "@/utils/gsapUtils";
-import { registerTimeline } from "@/fullpageScroll/fullPage";
+// import { registerTimeline } from "@/fullpageScroll/fullPage";
 import FPage from "@/fullpageScroll/FPage";
 
 export default {
@@ -38,13 +44,30 @@ export default {
       text1: "#preface-text1",
       text2: "#preface-text2"
     };
+
     const timeline = hiveTimeline();
+
     timeline
       .setFadeUpState(refs.text1)
-      .fadeUp(refs.text1, 0.7)
+      .fadeUp(refs.text1, { fade: 0.7 })
       .setFadeUpState(refs.text2)
-      .fadeUp(refs.text2, 0.7);
-    registerTimeline(timeline);
+      .fadeUp(refs.text2, { fade: 0.7 });
+    function entered() {
+      console.log("preface entered");
+      timeline.play();
+    }
+    function beforeEnter() {
+      timeline.reset();
+    }
+    function beforeLeave() {
+      timeline.pause();
+    }
+    // registerTimeline(timeline);
+    return {
+      entered,
+      beforeEnter,
+      beforeLeave
+    };
   }
 };
 </script>

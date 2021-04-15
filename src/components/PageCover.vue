@@ -1,5 +1,9 @@
 <template>
-  <f-page @before-enter="onBeforeEnter" @before-leave="onBeforeLeave">
+  <f-page
+    @before-enter="onBeforeEnter"
+    @before-leave="onBeforeLeave"
+    @entered="entered"
+  >
     <div class="full-page flex-center bg-warm-white">
       <img
         id="arc"
@@ -49,12 +53,13 @@ import gsap from "gsap";
 import FPage from "@/fullpageScroll/FPage";
 import { nextPage, useCurrentPage } from "@/fullpageScroll/fullPage";
 import ScrollDownAni from "@/components/ScrollDownAni";
+import { IDs } from "@/utils/global";
 
 export default {
   name: "CoverPage",
   components: { ScrollDownAni, FPage },
   setup() {
-    const timeline = gsap.timeline({ delay: 1 });
+    const timeline = gsap.timeline({ delay: 1, paused: true });
     const currentPage = useCurrentPage();
     function setMotionFadeState(what, and = {}) {
       gsap.set(what, {
@@ -72,11 +77,11 @@ export default {
     }
 
     const refs = {
-      register: "#global-register"
+      register: "#" + IDs.registerBtn
     };
     const registerCenterState = {
       top: "59vh",
-      opacity: 0.8
+      opacity: 0.7
     };
     onMounted(() => {
       gsap.set("#arc", {
@@ -103,18 +108,26 @@ export default {
       });
       toMotionFade("#cover-logo", 0.9);
       toMotionFade("#cover-deepdene", 0.8);
-      timeline.to("#global-register", {
+      timeline.to(refs.register, {
         ...registerCenterState,
         translateY: 0
       });
       toMotionFade("#cover-scroll-down");
     });
     function onload() {
-      if (currentPage.value === 0) timeline.play();
+      console.log("image onload");
+      if (currentPage.value === 0) {
+        console.log("current page 0 and play!");
+        timeline.play();
+      }
     }
     function onBeforeEnter() {
+      console.log("cover before enter");
       if (timeline.paused()) timeline.resume();
       else gsap.to(refs.register, registerCenterState);
+    }
+    function entered() {
+      console.log("cover entered");
     }
     function onBeforeLeave() {
       if (timeline.isActive()) timeline.pause();
@@ -122,7 +135,7 @@ export default {
     function next() {
       nextPage();
     }
-    return { onload, onBeforeEnter, next, onBeforeLeave };
+    return { onload, onBeforeEnter, next, onBeforeLeave, entered };
   }
 };
 </script>

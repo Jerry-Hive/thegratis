@@ -27,9 +27,9 @@ export function timelineHelper(timeline) {
 }
 export function hiveTimeline(
   options,
-  defaults = { duration: 1.5, ease: "power4" }
+  defaults = { duration: 1.5, ease: "power4", paused: true }
 ) {
-  const timeline = gsap.timeline({ ...options, defaults });
+  const timeline = gsap.timeline({ ...defaults, ...options });
   const keyFrames = [];
   const fromState = [];
   let initialised = false;
@@ -39,6 +39,7 @@ export function hiveTimeline(
     initialised = true;
     for (let i = 0; i < keyFrames.length; i++) {
       const key = keyFrames[i];
+      console.log(keyFrames[i]);
       if (key.to) timeline.to(key.target, key.options);
       else if (key.set) timeline.set(key.target, key.options);
     }
@@ -71,10 +72,11 @@ export function hiveTimeline(
       });
       return returned;
     },
-    fadeUp(target, fade = 0) {
+    fadeUp(target, { fade = 1, duration = 1 }) {
       returned.to(target, {
         translateY: 0,
-        opacity: fade
+        opacity: fade,
+        duration: duration
       });
       return returned;
     },
@@ -96,10 +98,18 @@ export function hiveTimeline(
     },
     play() {
       init();
+      console.log(timeline);
       timeline.play(0);
     },
     reset() {
+      timeline.pause();
+      timeline.clear();
+      initialised = false;
       setFromState();
+      init();
+    },
+    pause() {
+      timeline.pause();
     }
   };
   return returned;

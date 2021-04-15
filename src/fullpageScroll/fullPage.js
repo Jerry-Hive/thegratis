@@ -26,7 +26,8 @@ const pageMap = {};
 const hashMap = {};
 const state = reactive({
   currentPage: 0,
-  hash: undefined
+  hash: undefined,
+  enteringPage: null
 });
 let dummy;
 let scrolling = false;
@@ -41,6 +42,10 @@ export function getCurrentPage() {
 }
 export function getTotalPages() {
   return pages.length;
+}
+
+export function getEnteringPage() {
+  return state.enteringPage;
 }
 
 function updateCurrentPageByHash() {
@@ -68,10 +73,11 @@ export function init() {
       "z-index": -1
     });
     handleHashChange();
-    console.log(state.currentPage);
+    // console.log(state.currentPage);
     const uid = pages[state.currentPage];
+    state.enteringPage = state.currentPage;
     const firstContainer = pageMap[uid].container;
-    console.log(firstContainer);
+    // console.log(firstContainer);
     const firstPageInstance = pageMap[uid].instance;
     playAllVideos(firstContainer);
     gsap.set(firstContainer, { display: "flex", top: 0 });
@@ -88,6 +94,7 @@ export function init() {
         move(from, to);
       }
     );
+    console.log(pages);
   });
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll);
@@ -100,7 +107,7 @@ function handleScroll(e) {
     e.preventDefault();
     return false;
   }
-  console.log("scrolling");
+  // console.log("scrolling");
   const y = window.scrollY;
   // console.log("scrollY", scrollY, y);
   const diff = y - scrollY;
