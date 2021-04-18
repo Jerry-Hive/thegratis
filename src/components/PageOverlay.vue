@@ -26,8 +26,6 @@
     <transition-fade :y-percent="5" :delay="0.5">
       <div
         style="position: fixed; top:20px;right:20px;width:25px;cursor: pointer;z-index: 99999999"
-        id="close"
-        ref="close"
         class="stroke-peach enable-events"
         @click="close"
         v-if="isFormOpen"
@@ -91,6 +89,9 @@ export default {
     }
     function close() {
       isFormOpen.value = false;
+      const circleStyler = styler(circleRef.value);
+      // circleStyler.centerTo(regRef.value);
+      circleStyler.scale(0, 0);
     }
     return {
       isFormOpen,

@@ -11,11 +11,11 @@
         ref="form"
         v-if="status === FORM_STATUS.FORM"
       >
-        <!--      <img-->
-        <!--        ref="logo"-->
-        <!--        src="@/assets/logo-peach.png"-->
-        <!--        style="height:7vh;margin:2vh"-->
-        <!--      />-->
+        <img
+          ref="logo"
+          src="@/assets/logo-peach.png"
+          style="height:7vh;margin:2vh"
+        />
 
         <form
           id="hive-form"
@@ -90,7 +90,7 @@
           </div>
         </form>
         <div
-          class="caslon italic text-center confort-letter-spacing"
+          class="caslon italic text-center comfort-letter-spacing text-peach"
           style="margin:5vh;font-size:1.4vh"
         >
           Or call
