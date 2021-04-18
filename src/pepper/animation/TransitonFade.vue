@@ -23,6 +23,10 @@ export default {
     yPercent: {
       type: Number,
       default: 0
+    },
+    delay: {
+      type: Number,
+      default: 0
     }
   },
   setup(props) {
@@ -54,7 +58,8 @@ export default {
           opacity: 1,
           ease: "circ.out",
           onComplete: done,
-          yPercent: 0
+          yPercent: 0,
+          delay: props.delay
         });
       },
       leave(el, done) {

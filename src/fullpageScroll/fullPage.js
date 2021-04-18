@@ -37,6 +37,7 @@ let movingInContainer;
 export function useCurrentPage() {
   return computed(() => state.currentPage);
 }
+
 export function getCurrentPage() {
   return state.currentPage;
 }
@@ -57,6 +58,7 @@ function updateCurrentPageByHash() {
     }
   }
 }
+
 export function init() {
   if (!dummy) {
     dummy = document.createElement("div");
@@ -66,6 +68,7 @@ export function init() {
   }
 
   onMounted(() => {
+    console.log("fullpage mounted");
     setStyle(dummy, {
       height: pages.length * 100 + "vh",
       top: "0",
@@ -132,6 +135,7 @@ function handleHashChange() {
     updateCurrentPageByHash();
   }
 }
+console.log(location.hash);
 export function nextPage() {
   state.currentPage++;
 }

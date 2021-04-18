@@ -50,87 +50,139 @@
 <script>
 import { onMounted } from "vue";
 import gsap from "gsap";
-import FPage from "@/fullpageScroll/FPage";
-import { nextPage, useCurrentPage } from "@/fullpageScroll/fullPage";
+import {
+  getEnteringPage,
+  nextPage,
+  useCurrentPage
+} from "@/fullpageScroll/fullPage";
 import ScrollDownAni from "@/components/ScrollDownAni";
 import { IDs } from "@/utils/global";
+import { hiveTimeline } from "@/utils/gsapUtils";
+import FPage from "@/fullpageScroll/FPage";
 
 export default {
   name: "CoverPage",
   components: { ScrollDownAni, FPage },
   setup() {
-    const timeline = gsap.timeline({ delay: 1, paused: true });
-    const currentPage = useCurrentPage();
-    function setMotionFadeState(what, and = {}) {
-      gsap.set(what, {
-        ...and,
-        opacity: 0,
-        translateY: "20%"
-      });
-    }
-    function toMotionFade(what, opacity = 1) {
-      timeline.to(what, {
-        translateY: 0,
-        opacity,
-        duration: 1
-      });
-    }
-
     const refs = {
-      register: "#" + IDs.registerBtn
+      register: "#" + IDs.registerBtn,
+      logo: "#cover-logo",
+      deepdene: "#cover-deepdene",
+      scrollDown: "#cover-scroll-down",
+      arc: "#arc",
+      hero: "#hero"
     };
+
+    let played = false;
+    let imageLoaded = false;
     const registerCenterState = {
       top: "59vh",
       opacity: 0.7
     };
+
+    const timeline = hiveTimeline();
+    timeline
+      .setFromState(refs.hero, { opacity: 0 })
+      .fadeIn(refs.hero)
+      .setFromState(refs.arc, { opacity: 0, scale: 10 })
+      .to(refs.arc, { opacity: 1, scale: 1, duration: 2, ease: "power3.out" })
+      .setFadeUpState(refs.logo)
+      .fadeUp(refs.logo, { opacity: 0.7 })
+      .setFadeUpState(refs.deepdene)
+      .fadeUp(refs.deepdene, { opacity: 0.7 })
+      .fadeUp(refs.register, { opacity: 0.7 })
+      .setFadeUpState(refs.scrollDown, { opacity: 0.7 })
+      .to(refs.register, registerCenterState)
+
+      .fadeUp(refs.scrollDown);
+
+    // const timeline = gsap.timeline({ delay: 1, paused: true });
+    const currentPage = useCurrentPage();
+    // function setMotionFadeState(what, and = {}) {
+    //   gsap.set(what, {
+    //     ...and,
+    //     opacity: 0,
+    //     translateY: "20%"
+    //   });
+    // }
+    // function toMotionFade(what, opacity = 1) {
+    //   timeline.to(what, {
+    //     translateY: 0,
+    //     opacity,
+    //     duration: 1
+    //   });
+    // }
+
     onMounted(() => {
-      gsap.set("#arc", {
-        opacity: 0,
-        scale: 10
-      });
-      gsap.set("#hero", {
-        opacity: 0
-      });
-      setMotionFadeState("#cover-logo");
-      setMotionFadeState("#cover-deepdene");
-      setMotionFadeState("#cover-scroll-down");
-
-      if (currentPage.value === 0) {
-        setMotionFadeState(refs.register, registerCenterState);
-      }
-      toMotionFade("#hero");
-
-      timeline.to("#arc", {
-        opacity: 1,
-        duration: 2,
-        scale: 1,
-        ease: "power3.out"
-      });
-      toMotionFade("#cover-logo", 0.9);
-      toMotionFade("#cover-deepdene", 0.8);
-      timeline.to(refs.register, {
-        ...registerCenterState,
-        translateY: 0
-      });
-      toMotionFade("#cover-scroll-down");
+      // gsap.set("#arc", {
+      //   opacity: 0,
+      //   scale: 10
+      // });
+      // gsap.set("#hero", {
+      //   opacity: 0
+      // });
+      // setMotionFadeState("#cover-logo");
+      // setMotionFadeState("#cover-deepdene");
+      // setMotionFadeState("#cover-scroll-down");
+      //
+      // if (currentPage.value === 0) {
+      //   setMotionFadeState(refs.register, registerCenterState);
+      // }
+      // toMotionFade("#hero");
+      //
+      // timeline.to("#arc", {
+      //   opacity: 1,
+      //   duration: 2,
+      //   scale: 1,
+      //   ease: "power3.out"
+      // });
+      // toMotionFade("#cover-logo", 0.9);
+      // toMotionFade("#cover-deepdene", 0.8);
+      // timeline.to(refs.register, {
+      //   ...registerCenterState,
+      //   translateY: 0
+      // });
+      // toMotionFade("#cover-scroll-down");
     });
+    function play() {
+      if (currentPage.value !== 0) return;
+      if (!imageLoaded) return;
+      if (played) return;
+      played = true;
+      timeline.play();
+    }
     function onload() {
       console.log("image onload");
-      if (currentPage.value === 0) {
-        console.log("current page 0 and play!");
-        timeline.play();
-      }
+      imageLoaded = true;
+      play();
+      // if (currentPage.value === 0) {
+      //   console.log("current page 0 and play!");
+      //   play();
+      // }
     }
     function onBeforeEnter() {
       console.log("cover before enter");
-      if (timeline.paused()) timeline.resume();
-      else gsap.to(refs.register, registerCenterState);
+      const enteringPage = getEnteringPage();
+      if (enteringPage !== 0) {
+        gsap.set(refs.hero, { opacity: 1 });
+      }
+      if (!played) {
+        gsap.set(refs.register, {
+          ...registerCenterState,
+          translateY: "20%",
+          opacity: 0
+        });
+      } else {
+        gsap.to(refs.register, registerCenterState);
+      }
+      // if (timeline.paused()) timeline.resume();
+      // else gsap.to(refs.register, registerCenterState);
     }
     function entered() {
-      console.log("cover entered");
+      play();
     }
     function onBeforeLeave() {
-      if (timeline.isActive()) timeline.pause();
+      // if (timeline.isActive()) timeline.pause();
     }
     function next() {
       nextPage();

@@ -49,9 +49,9 @@ export default {
 
     timeline
       .setFadeUpState(refs.text1)
-      .fadeUp(refs.text1, { fade: 0.7 })
+      .fadeUp(refs.text1, { opacity: 0.7 })
       .setFadeUpState(refs.text2)
-      .fadeUp(refs.text2, { fade: 0.7 });
+      .fadeUp(refs.text2, { opacity: 0.7 });
     function entered() {
       console.log("preface entered");
       timeline.play();

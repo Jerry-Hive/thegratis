@@ -160,3 +160,38 @@ img{
 .disable-select{
   user-select: none;
 }
+.hoverOpaque{
+  transition: opacity 1s;
+}
+.hoverOpaque:hover{
+  opacity:1
+}
+// -------------------- Fill Colors ---------------------
+.fill-white rect,
+.fill-white line,
+.fill-white polygon,
+.fill-white path {
+  fill: #eeeeee;
+}
+.fill-peach,
+.fill-peach rect,
+.fill-peach line,
+.fill-peach polygon,
+.fill-peach path {
+  fill: #edd9d0;
+}
+.fill-navy,
+.fill-navy rect,
+.fill-navy circle,
+.fill-navy line,
+.fill-navy polygon,
+.fill-navy path {
+  fill: #29323c;
+}
+.stroke-peach line {
+  stroke: #edd9d0;
+}
+// -------------------- Others ---------------------
+.pointer-thru {
+  pointer-events: none;
+}

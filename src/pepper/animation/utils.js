@@ -8,3 +8,13 @@ export function fadeToInvisible(target, duration = 1) {
     duration
   });
 }
+export function invisibleToVisible(target, duration = 1, opacity = 1) {
+  gsap.set(target, {
+    visibility: "visible",
+    opacity: 0
+  });
+  gsap.to(target, {
+    opacity,
+    duration
+  });
+}

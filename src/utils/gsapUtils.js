@@ -72,11 +72,19 @@ export function hiveTimeline(
       });
       return returned;
     },
-    fadeUp(target, { fade = 1, duration = 1 }) {
+    fadeUp(target, options) {
+      const { opacity = 1, duration = 1 } = options || {};
       returned.to(target, {
         translateY: 0,
-        opacity: fade,
-        duration: duration
+        opacity,
+        duration
+      });
+      return returned;
+    },
+    fadeIn(target, duration = 0.6) {
+      returned.to(target, {
+        opacity: 1,
+        duration
       });
       return returned;
     },
@@ -98,8 +106,7 @@ export function hiveTimeline(
     },
     play() {
       init();
-      console.log(timeline);
-      timeline.play(0);
+      timeline.play();
     },
     reset() {
       timeline.pause();

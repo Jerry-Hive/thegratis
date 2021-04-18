@@ -20,6 +20,8 @@ import PageOverlay from "@/components/PageOverlay";
 import PageTheHomesSlider from "@/components/PageTheHomesSlider";
 import PageAerial from "@/components/PageAerial";
 import PageProjectVideo from "@/components/PageProjectVideo";
+import * as Vue from "vue";
+console.log(Vue.version);
 export default {
   name: "App",
   components: {
