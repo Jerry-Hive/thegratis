@@ -44,12 +44,24 @@
         </svg>
       </div>
     </transition-fade>
+    <transition-fade>
+      <div
+        style="position: fixed;bottom: 0;height:50px"
+        v-if="currentPage > 0 && currentPage !== getTotalPages() - 1"
+      >
+        <scroll-down-ani-sml @click="nextPage" class="enable-events hand" />
+      </div>
+    </transition-fade>
   </f-page-overlay>
 </template>
 
 <script>
 import FPageOverlay from "@/fullpageScroll/FPageOverlay";
-import { useCurrentPage } from "@/fullpageScroll/fullPage";
+import {
+  getTotalPages,
+  nextPage,
+  useCurrentPage
+} from "@/fullpageScroll/fullPage";
 import { onMounted, ref, watch } from "vue";
 import gsap from "gsap";
 import { IDs } from "@/utils/global";
@@ -58,10 +70,11 @@ import styler from "@/pepper/utils/styler";
 import { templateRef } from "@vueuse/core";
 import RegisterForm from "@/components/RegisterForm";
 import TransitionFade from "@/pepper/animation/TransitonFade";
+import ScrollDownAniSml from "@/components/ScrollDownAniSml";
 
 export default {
   name: "PageOverlay",
-  components: { TransitionFade, RegisterForm, FPageOverlay },
+  components: { ScrollDownAniSml, TransitionFade, RegisterForm, FPageOverlay },
   setup() {
     const currentPage = useCurrentPage();
     const regId = IDs.registerBtn;
@@ -95,6 +108,9 @@ export default {
     }
     return {
       isFormOpen,
+      currentPage,
+      getTotalPages: getTotalPages,
+      nextPage: nextPage,
       regId,
       regClick,
       regEnter() {

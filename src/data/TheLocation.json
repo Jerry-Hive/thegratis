@@ -2,64 +2,64 @@
 	"imageRoot": "/images/lifestyle/",
 	"slides": [
 		{
-			"img": "sacville",
+			"img": "sacville.jpg",
 			"title": "Sackville Street",
-			"loc": "green"
+			"label": "green"
 		},
 		{
-			"img": "trail2",
+			"img": "trail2.jpg",
 			"title": "The Anniversary Trail",
-			"loc": "green"
+			"label": "green"
 		},
 		{
-			"img": "park-elax2",
+			"img": "park-elax2.jpg",
 			"title": "Central Gardens",
-			"loc": "green"
+			"label": "green"
 		},
 		{
-			"img": "shop3",
+			"img": "shop3.jpg",
 			"title": "Town & Country",
-			"loc": "dine"
+			"label": "dine"
 		},
 		{
-			"img": "wine2",
+			"img": "wine2.jpg",
 			"title": "Meat & Wine",
-			"loc": "dine"
+			"label": "dine"
 		},
 		{
-			"img": "dine1",
+			"img": "dine1.jpg",
 			"title": "Centonove",
-			"loc": "dine"
+			"label": "dine"
 		},
 		{
-			"img": "school3",
+			"img": "school3.jpg",
 			"title": "The best schools in Melbourne",
-			"loc": "school"
+			"label": "school"
 		},
 		{
-			"img": "school2",
+			"img": "school2.jpg",
 			"title": "Just moments from your door",
-			"loc": "school"
+			"label": "school"
 		},
 		{
-			"img": "market",
+			"img": "market.jpg",
 			"title": "Camberwell Fresh Food Market",
-			"loc": "shopping"
+			"label": "shopping"
 		},
 		{
-			"img": "shop4",
+			"img": "shop4.jpg",
 			"title": "Camberwell Place Shopping Centre",
-			"loc": "shopping"
+			"label": "shopping"
 		},
 		{
-			"img": "golf",
+			"img": "golf.jpg",
 			"title": "Kew Golf Club",
-			"loc": "recreation"
+			"label": "recreation"
 		},
 		{
-			"img": "cinema",
+			"img": "cinema.jpg",
 			"title": "Balwyn Palace",
-			"loc": "recreation"
+			"label": "recreation"
 		}
 	],
 	"locations": {

@@ -39,7 +39,7 @@ export function hiveTimeline(
     initialised = true;
     for (let i = 0; i < keyFrames.length; i++) {
       const key = keyFrames[i];
-      console.log(keyFrames[i]);
+      // console.log(keyFrames[i]);
       if (key.to) timeline.to(key.target, key.options);
       else if (key.set) timeline.set(key.target, key.options);
     }

@@ -5,7 +5,11 @@
     @entered="entered"
     class="bg-peach"
   >
-    <div class="full-size text-navy" style="display:flex;">
+    <div
+      class="full-size text-navy"
+      style="display:flex;"
+      :style="{ 'flex-direction': reverse ? 'row-reverse' : 'row' }"
+    >
       <div class="col flex-center" v-if="showText">
         <div style="width:80%">
           <img src="@/assets/the-homes.png" style="height:7vh;" />
@@ -54,7 +58,8 @@ export default {
     slides: { type: Array, required: true },
     folder: String,
     texts: Object,
-    hash: String
+    hash: String,
+    reverse: Boolean
   },
   components: { ArcSlider, HiveTextCarousel, FPage },
   setup(props) {
