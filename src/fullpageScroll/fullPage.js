@@ -68,7 +68,7 @@ export function init() {
   }
 
   onMounted(() => {
-    console.log("fullpage mounted");
+    // console.log("fullpage mounted");
     setStyle(dummy, {
       height: pages.length * 100 + "vh",
       top: "0",
@@ -97,7 +97,7 @@ export function init() {
         move(from, to);
       }
     );
-    console.log(pages);
+    // console.log(pages);
   });
   onUnmounted(() => {
     window.removeEventListener("scroll", handleScroll);
@@ -130,12 +130,12 @@ function handleScroll(e) {
 function handleHashChange() {
   const hash = location.hash;
   if (hash && hash.length) {
-    console.log("got hash: ", hash);
+    // console.log("got hash: ", hash);
     state.hash = hash.substr(1);
     updateCurrentPageByHash();
   }
 }
-console.log(location.hash);
+// console.log(location.hash);
 export function nextPage() {
   state.currentPage++;
 }
@@ -146,7 +146,7 @@ export function firstPage() {
   move(-state.currentPage);
 }
 function move(from, to) {
-  console.log("move", from, to);
+  // console.log("move", from, to);
   const fromId = pages[from];
   const toId = pages[to];
   const fromContainer = pageMap[fromId].container;

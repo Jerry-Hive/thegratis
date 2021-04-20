@@ -76,7 +76,7 @@ export default {
       () => store.state.cursor,
       index => {
         const slide = props.slides[index];
-        console.log(slide);
+        // console.log(slide);
         // this.title = slide.title;
         currentLabel.value = slide.label;
       }
