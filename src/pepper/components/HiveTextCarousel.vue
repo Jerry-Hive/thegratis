@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import HiveFader from "./controllers/HiveFader";
+import HiveFader from "../utils/HiveFader";
 import { onMounted, ref, watch } from "vue";
 import { setStyle } from "@/pepper/utils/domUtils";
 import { useElementSize } from "@vueuse/core";
