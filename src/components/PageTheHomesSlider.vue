@@ -1,6 +1,7 @@
 <template>
   <page-arc-slider
     hash="the-homes"
+    :logo="theHomes"
     :slides="slides"
     :texts="texts"
     :folder="folder"
@@ -10,6 +11,7 @@
 <script>
 import homesData from "@/data/TheHomes.json";
 import PageArcSlider from "@/components/PageArcSlider";
+import theHomes from "@/assets/the-homes.png";
 
 // const data = [];
 // const carouselTitles = {};
@@ -35,7 +37,8 @@ export default {
     return {
       slides: homesData.slides,
       texts,
-      folder: homesData.imageRoot
+      folder: homesData.imageRoot,
+      theHomes
     };
   }
 };

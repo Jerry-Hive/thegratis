@@ -57,4 +57,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+iframe {
+  border: none;
+}
+</style>

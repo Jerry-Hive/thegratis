@@ -10,9 +10,9 @@
       style="display:flex;"
       :style="{ 'flex-direction': reverse ? 'row-reverse' : 'row' }"
     >
-      <div class="col flex-center" v-if="showText">
+      <div class="col flex-center" v-if="isBigScreen">
         <div style="width:80%">
-          <img src="@/assets/the-homes.png" style="height:7vh;" />
+          <img :src="logo" style="height:7vh;" />
           <br />
           <br />
           <hive-text-carousel
@@ -36,6 +36,11 @@
         </div>
       </div>
       <div class="col flex-center">
+        <img
+          :src="logo"
+          style="height:7vh; margin-bottom: 2vh"
+          v-if="!isBigScreen"
+        />
         <arc-slider />
       </div>
     </div>
@@ -59,7 +64,8 @@ export default {
     folder: String,
     texts: Object,
     hash: String,
-    reverse: Boolean
+    reverse: Boolean,
+    logo: null
   },
   components: { ArcSlider, HiveTextCarousel, FPage },
   setup(props) {
@@ -93,7 +99,7 @@ export default {
       store.play();
     }
     const { width: windowWidth, height: windowHeight } = useWindowSize();
-    const showText = computed(() => {
+    const isBigScreen = computed(() => {
       const width = windowWidth.value;
       const height = windowHeight.value;
       if (height > width) return false;
@@ -102,7 +108,7 @@ export default {
     return {
       beforeLeave,
       entered,
-      showText,
+      isBigScreen,
       titles,
       currentLabel,
       currentSlide: computed(() => store.state.cursor)

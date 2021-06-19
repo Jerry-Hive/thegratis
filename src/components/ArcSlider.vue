@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex-center">
+  <div class="arc-slider-container flex-center">
     <div class="slider-container relative">
       <hive-photo-slider-headless class="slider-container" debug />
       <img
@@ -40,9 +40,9 @@ export default {
   width: 40vh;
   height: 60vh;
 }
-.container {
-  width: 100%;
-  height: 100%;
+.arc-slider-container {
+  //width: 100%;
+  //height: 100%;
   overflow: hidden;
   position: relative;
 }

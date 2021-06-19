@@ -117,6 +117,9 @@ export function hiveTimeline(
     },
     pause() {
       timeline.pause();
+    },
+    end() {
+      timeline.seek("-=0");
     }
   };
   return returned;

@@ -103,7 +103,7 @@ export default {
           gsap.to(reg, { top: "38vh", opacity: 0.9 });
         } else {
           console.log("move reg to top");
-          gsap.to(reg, { top: "-1.5vh", opacity: 0.7 });
+          gsap.to(reg, { top: "-1.5vh", opacity: 0.7, translateY: 0 });
         }
       }
     });

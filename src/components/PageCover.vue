@@ -2,6 +2,7 @@
   <f-page
     @before-enter="onBeforeEnter"
     @before-leave="onBeforeLeave"
+    @left="left"
     @entered="entered"
   >
     <div class="full-page flex-center bg-warm-white">
@@ -48,7 +49,6 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
 import gsap from "gsap";
 import {
   getEnteringPage,
@@ -98,52 +98,7 @@ export default {
 
     // const timeline = gsap.timeline({ delay: 1, paused: true });
     const currentPage = useCurrentPage();
-    // function setMotionFadeState(what, and = {}) {
-    //   gsap.set(what, {
-    //     ...and,
-    //     opacity: 0,
-    //     translateY: "20%"
-    //   });
-    // }
-    // function toMotionFade(what, opacity = 1) {
-    //   timeline.to(what, {
-    //     translateY: 0,
-    //     opacity,
-    //     duration: 1
-    //   });
-    // }
 
-    onMounted(() => {
-      // gsap.set("#arc", {
-      //   opacity: 0,
-      //   scale: 10
-      // });
-      // gsap.set("#hero", {
-      //   opacity: 0
-      // });
-      // setMotionFadeState("#cover-logo");
-      // setMotionFadeState("#cover-deepdene");
-      // setMotionFadeState("#cover-scroll-down");
-      //
-      // if (currentPage.value === 0) {
-      //   setMotionFadeState(refs.register, registerCenterState);
-      // }
-      // toMotionFade("#hero");
-      //
-      // timeline.to("#arc", {
-      //   opacity: 1,
-      //   duration: 2,
-      //   scale: 1,
-      //   ease: "power3.out"
-      // });
-      // toMotionFade("#cover-logo", 0.9);
-      // toMotionFade("#cover-deepdene", 0.8);
-      // timeline.to(refs.register, {
-      //   ...registerCenterState,
-      //   translateY: 0
-      // });
-      // toMotionFade("#cover-scroll-down");
-    });
     function play() {
       if (currentPage.value !== 0) return;
       if (!imageLoaded) return;
@@ -173,7 +128,9 @@ export default {
           opacity: 0
         });
       } else {
+        // console.log("played and only set reg", registerCenterState);
         gsap.to(refs.register, registerCenterState);
+        timeline.end();
       }
       // if (timeline.paused()) timeline.resume();
       // else gsap.to(refs.register, registerCenterState);
@@ -182,12 +139,13 @@ export default {
       play();
     }
     function onBeforeLeave() {
-      // if (timeline.isActive()) timeline.pause();
+      timeline.pause();
     }
+    function left() {}
     function next() {
       nextPage();
     }
-    return { onload, onBeforeEnter, next, onBeforeLeave, entered };
+    return { onload, onBeforeEnter, next, onBeforeLeave, entered, left };
   }
 };
 </script>

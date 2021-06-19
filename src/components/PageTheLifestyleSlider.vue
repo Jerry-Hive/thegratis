@@ -4,6 +4,7 @@
     :slides="slides"
     :texts="texts"
     :folder="folder"
+    :logo="logo"
     reverse
   />
 </template>
@@ -11,6 +12,7 @@
 <script>
 import data from "@/data/TheLocation.json";
 import PageArcSlider from "@/components/PageArcSlider";
+import theLifestyle from "@/assets/the-lifestyle.png";
 
 // const data = [];
 // const carouselTitles = {};
@@ -33,7 +35,8 @@ export default {
     return {
       slides: data.slides,
       texts,
-      folder: data.imageRoot
+      folder: data.imageRoot,
+      logo: theLifestyle
     };
   }
 };
