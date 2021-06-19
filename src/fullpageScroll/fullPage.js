@@ -38,6 +38,13 @@ export function useCurrentPage() {
   return computed(() => state.currentPage);
 }
 
+export function useIsLastPage() {
+  return computed(() => state.currentPage === getTotalPages() - 1);
+}
+export function isLastPage() {
+  return state.currentPage === getTotalPages() - 1;
+}
+
 export function getCurrentPage() {
   return state.currentPage;
 }
@@ -143,7 +150,7 @@ export function prevPage() {
   state.currentPage--;
 }
 export function firstPage() {
-  move(-state.currentPage);
+  state.currentPage = 0;
 }
 function move(from, to) {
   // console.log("move", from, to);

@@ -195,3 +195,16 @@ img{
 .pointer-thru {
   pointer-events: none;
 }
+
+/* -webkit- (Chrome, Safari, newer versions of Opera): */
+body::-webkit-scrollbar {
+  width: 0 !important;
+}
+/* -moz- (Firefox): */
+body {
+  overflow: -moz-scrollbars-none;
+}
+/* -ms- (Internet Explorer +10): */
+body {
+  -ms-overflow-style: none;
+}

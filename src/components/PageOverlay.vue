@@ -52,15 +52,23 @@
         <scroll-down-ani-sml @click="nextPage" class="enable-events hand" />
       </div>
     </transition-fade>
+    <transition-fade>
+      <div style="position: fixed;top: 0;height:50px" v-if="isLastPage">
+        <scroll-up-ani-sml @click="firstPage" class="enable-events hand" />
+      </div>
+    </transition-fade>
   </f-page-overlay>
 </template>
 
 <script>
 import FPageOverlay from "@/fullpageScroll/FPageOverlay";
 import {
+  firstPage,
   getTotalPages,
+  isLastPage,
   nextPage,
-  useCurrentPage
+  useCurrentPage,
+  useIsLastPage
 } from "@/fullpageScroll/fullPage";
 import { onMounted, ref, watch } from "vue";
 import gsap from "gsap";
@@ -71,10 +79,17 @@ import { templateRef } from "@vueuse/core";
 import RegisterForm from "@/components/RegisterForm";
 import TransitionFade from "@/pepper/animation/TransitonFade";
 import ScrollDownAniSml from "@/components/ScrollDownAniSml";
+import ScrollUpAniSml from "@/components/ScrollUpAniSml";
 
 export default {
   name: "PageOverlay",
-  components: { ScrollDownAniSml, TransitionFade, RegisterForm, FPageOverlay },
+  components: {
+    ScrollUpAniSml,
+    ScrollDownAniSml,
+    TransitionFade,
+    RegisterForm,
+    FPageOverlay
+  },
   setup() {
     const currentPage = useCurrentPage();
     const regId = IDs.registerBtn;
@@ -84,8 +99,12 @@ export default {
     watch(currentPage, v => {
       console.log("cPage changed", v);
       if (v > 0) {
-        console.log("move reg to top");
-        gsap.to(reg, { top: "-1.5vh", opacity: 0.7 });
+        if (isLastPage()) {
+          gsap.to(reg, { top: "38vh", opacity: 0.9 });
+        } else {
+          console.log("move reg to top");
+          gsap.to(reg, { top: "-1.5vh", opacity: 0.7 });
+        }
       }
     });
     const circleRef = templateRef("circle");
@@ -111,6 +130,8 @@ export default {
       currentPage,
       getTotalPages: getTotalPages,
       nextPage: nextPage,
+      firstPage: firstPage,
+      isLastPage: useIsLastPage(),
       regId,
       regClick,
       regEnter() {
